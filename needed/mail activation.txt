@@ -1,0 +1,11 @@
+Welcome to CMT !
+Your account sofianehmimssa@hotmail.com has been registered, please verify it by clicking the activation link that has been sent to this email address.
+If you do not receive the activation link
+If you do not receive our mail to activate account, the following are some of the possible reasons for the problem.
+
+You typed in an incorrect email address.
+Slow mail processing at your email server.
+Your mailbox has exceeded quota.
+Spam filters configured at your mailbox or email server have marked the email as spam.
+There are connection issue with your email server.
+CMT could not address issues related to your mailbox or mail server. You could probably try to use an email account such as Hotmail, Outlook, Gmail, or Yahoo! Mail. You will be able to change email address with your account later.
