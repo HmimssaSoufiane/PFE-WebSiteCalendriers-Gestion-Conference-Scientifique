@@ -1,8 +1,8 @@
 package com.este.conf.model;
 
-import java.util.SortedMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javax.persistence.Entity;
@@ -16,14 +16,19 @@ import org.hibernate.annotations.SortNatural;
 @Entity
 public class Chair extends Person {
 	
-	@OneToMany(mappedBy = "Chair")
+	@OneToMany(mappedBy = "creator")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	private SortedSet<Conference> createdConferences = new TreeSet<>();
+
+	//---------M2M
 	
-	@OneToMany(mappedBy = "Chair")
+	@OneToMany(mappedBy = "chair")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	@MapKey(name = "article")
-	private SortedMap<Conference, ChairRole> chairConferenesRole = new TreeMap<>();
+	@MapKey(name = "conference")
+	private Set<ChairRole> chairRoles = new HashSet<>();
+	
+	public Chair () {}
+
 }

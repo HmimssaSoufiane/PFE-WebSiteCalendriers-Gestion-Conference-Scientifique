@@ -1,5 +1,6 @@
 package com.este.conf.model;
 
-public class Program {
+public class Sponsor {
 
+	
 }

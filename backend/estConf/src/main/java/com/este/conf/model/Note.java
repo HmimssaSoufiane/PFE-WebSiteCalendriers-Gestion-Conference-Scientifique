@@ -16,7 +16,6 @@ public class Note {
 	protected NotePK notePK;
 	private float note;
 
-
 	@ManyToOne
 	@JoinColumn(name = "idPerson", insertable = false, updatable = false)
 	@Cascade(value = { CascadeType.ALL })

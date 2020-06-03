@@ -11,7 +11,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class Scientist extends Person {
 
-	@OneToMany(mappedBy = "Scientist", orphanRemoval = true)
+	@OneToMany(mappedBy = "scientist", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
 	private Set<Note> notes = new HashSet<>();
 	

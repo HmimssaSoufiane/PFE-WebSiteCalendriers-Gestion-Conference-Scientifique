@@ -14,6 +14,7 @@ public class NotePK  implements Serializable {
     @Basic(optional = false)
     @Column(name = "idArticle")
     private int idArticle;
+    
     @Basic(optional = false)
     @Column(name = "idPerson")
     private int idPerson;

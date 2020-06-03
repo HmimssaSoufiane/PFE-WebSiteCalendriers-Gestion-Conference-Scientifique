@@ -15,4 +15,7 @@ public class ChairRolePK implements Serializable {
     @Basic(optional = false)
     @Column(name = "idPerson")
     private int idPerson;
+    
+	public ChairRolePK () {}
+
 }

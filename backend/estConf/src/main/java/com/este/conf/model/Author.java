@@ -13,11 +13,10 @@ import org.hibernate.annotations.SortNatural;
 @Entity
 public class Author extends Person {
 
-	@OneToMany(mappedBy = "Author")
+	@OneToMany(mappedBy = "author")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	private SortedSet<Article> articles = new TreeSet<>();
-	
-	
+	public Author () {}
 
 }
