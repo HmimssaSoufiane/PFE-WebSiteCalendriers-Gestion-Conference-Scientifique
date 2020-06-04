@@ -15,7 +15,8 @@ import org.hibernate.annotations.SortNatural;
 
 @Entity
 public class Chair extends Person {
-	
+
+
 	@OneToMany(mappedBy = "creator")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
@@ -29,6 +30,28 @@ public class Chair extends Person {
 	@MapKey(name = "conference")
 	private Set<ChairRole> chairRoles = new HashSet<>();
 	
-	public Chair () {}
+	
+	public Chair() {
+		// TODO Auto-generated constructor stub
+	}
+	public Chair(int idPerson, String title, String firstName, String middleName, String lastName, Byte[] photo,
+			String organizationName, String country, String region, String phone, String email, String password) {
+		super(idPerson, title, firstName, middleName, lastName, photo, organizationName, country, region, phone, email,
+				password);
+		// TODO Auto-generated constructor stub
+	}
+	public SortedSet<Conference> getCreatedConferences() {
+		return createdConferences;
+	}
+	public void setCreatedConferences(SortedSet<Conference> createdConferences) {
+		this.createdConferences = createdConferences;
+	}
+	public Set<ChairRole> getChairRoles() {
+		return chairRoles;
+	}
+	public void setChairRoles(Set<ChairRole> chairRoles) {
+		this.chairRoles = chairRoles;
+	}
+	
 
 }

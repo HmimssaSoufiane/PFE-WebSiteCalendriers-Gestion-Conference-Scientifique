@@ -18,4 +18,28 @@ public class ChairRolePK implements Serializable {
     
 	public ChairRolePK () {}
 
+	public ChairRolePK(int idConference, int idPerson) {
+		super();
+		this.idConference = idConference;
+		this.idPerson = idPerson;
+	}
+
+	public int getIdConference() {
+		return idConference;
+	}
+
+	public void setIdConference(int idConference) {
+		this.idConference = idConference;
+	}
+
+	public int getIdPerson() {
+		return idPerson;
+	}
+
+	public void setIdPerson(int idPerson) {
+		this.idPerson = idPerson;
+	}
+
+	
+	
 }

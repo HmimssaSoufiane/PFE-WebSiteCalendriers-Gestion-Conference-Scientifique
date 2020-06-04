@@ -41,7 +41,7 @@ public class Conference {
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private SortedSet<Planning> programs = new TreeSet<>();
+	private SortedSet<Planning> plannings = new TreeSet<>();
 		
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
@@ -62,6 +62,125 @@ public class Conference {
     Set<Sponsor> sponsors = new HashSet<>();
 	
 	public Conference () {}
+
+	public Conference(int idConference, String name, String shortName, String location, String about, String theme,
+			Date dateStar, Date dateEnd) {
+		super();
+		this.idConference = idConference;
+		this.name = name;
+		this.shortName = shortName;
+		this.location = location;
+		this.about = about;
+		this.theme = theme;
+		this.dateStar = dateStar;
+		this.dateEnd = dateEnd;
+	}
+
+
+
+	public int getIdConference() {
+		return idConference;
+	}
+
+	public void setIdConference(int idConference) {
+		this.idConference = idConference;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public Date getDateStar() {
+		return dateStar;
+	}
+
+	public void setDateStar(Date dateStar) {
+		this.dateStar = dateStar;
+	}
+
+	public Date getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
+	public SortedSet<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(SortedSet<Article> articles) {
+		this.articles = articles;
+	}
+
+	public SortedSet<Planning> getPlannings() {
+		return plannings;
+	}
+
+	public void setPlannings(SortedSet<Planning> plannings) {
+		this.plannings = plannings;
+	}
+
+	public Set<ChairRole> getChairsRoles() {
+		return chairsRoles;
+	}
+
+	public void setChairsRoles(Set<ChairRole> chairsRoles) {
+		this.chairsRoles = chairsRoles;
+	}
+
+	public Chair getCreator() {
+		return creator;
+	}
+
+	public void setCreator(Chair creator) {
+		this.creator = creator;
+	}
+
+	public Set<Sponsor> getSponsors() {
+		return sponsors;
+	}
+
+	public void setSponsors(Set<Sponsor> sponsors) {
+		this.sponsors = sponsors;
+	}
 
 	
 }

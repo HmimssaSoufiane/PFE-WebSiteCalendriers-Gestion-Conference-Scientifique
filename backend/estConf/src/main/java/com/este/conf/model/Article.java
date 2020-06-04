@@ -53,5 +53,92 @@ public class Article {
 	
 	public Article () {}
 	
+
+	public Article(int idArticle, String abstract_, Byte[] file, float noteAverage, String status, String[] keyword,
+			Author author, Conference conference) {
+		super();
+		this.idArticle = idArticle;
+		this.abstract_ = abstract_;
+		this.file = file;
+		this.noteAverage = noteAverage;
+		this.status = status;
+		this.keyword = keyword;
+		this.author = author;
+		this.conference = conference;
+	}
+
+
+	public int getIdArticle() {
+		return idArticle;
+	}
+
+	public void setIdArticle(int idArticle) {
+		this.idArticle = idArticle;
+	}
+
+	public String getAbstract_() {
+		return abstract_;
+	}
+
+	public void setAbstract_(String abstract_) {
+		this.abstract_ = abstract_;
+	}
+
+	public Byte[] getFile() {
+		return file;
+	}
+
+	public void setFile(Byte[] file) {
+		this.file = file;
+	}
+
+	public float getNoteAverage() {
+		return noteAverage;
+	}
+
+	public void setNoteAverage(float noteAverage) {
+		this.noteAverage = noteAverage;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String[] getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String[] keyword) {
+		this.keyword = keyword;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public Conference getConference() {
+		return conference;
+	}
+
+	public void setConference(Conference conference) {
+		this.conference = conference;
+	}
+
+	public Set<Note> getNotesByScientist() {
+		return notesByScientist;
+	}
+
+	public void setNotesByScientist(Set<Note> notesByScientist) {
+		this.notesByScientist = notesByScientist;
+	}
+	
 	
 }

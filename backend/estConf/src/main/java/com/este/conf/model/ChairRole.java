@@ -29,5 +29,59 @@ public class ChairRole {
 	
 	public ChairRole () {}
 
+	public ChairRole(ChairRolePK chairRolePK, String role, Chair chair, Conference conference) {
+		super();
+		this.chairRolePK = chairRolePK;
+		this.role = role;
+		this.chair = chair;
+		this.conference = conference;
+	}
+
+	public ChairRolePK getChairRolePK() {
+		return chairRolePK;
+	}
+
+
+
+	public void setChairRolePK(ChairRolePK chairRolePK) {
+		this.chairRolePK = chairRolePK;
+	}
+
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+	public Chair getChair() {
+		return chair;
+	}
+
+
+
+	public void setChair(Chair chair) {
+		this.chair = chair;
+	}
+
+
+
+	public Conference getConference() {
+		return conference;
+	}
+
+
+
+	public void setConference(Conference conference) {
+		this.conference = conference;
+	}
+
 
 }
