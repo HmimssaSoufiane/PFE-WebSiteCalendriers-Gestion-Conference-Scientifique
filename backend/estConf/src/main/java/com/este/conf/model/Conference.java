@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -49,6 +51,15 @@ public class Conference {
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
 	@JoinColumn(name="idPerson")
 	private Chair creator;
+	
+    @ManyToMany
+    @Cascade(value = { CascadeType.ALL })
+    @JoinTable(
+        name = "conference_sponsor", 
+        joinColumns = { @JoinColumn(name = "idConference") }, 
+        inverseJoinColumns = { @JoinColumn(name = "idSponsor") }
+    )
+    Set<Sponsor> sponsors = new HashSet<>();
 	
 	public Conference () {}
 
