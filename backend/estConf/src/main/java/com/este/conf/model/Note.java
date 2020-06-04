@@ -26,6 +26,11 @@ public class Note {
 	@Cascade(value = { CascadeType.ALL })
 	private Article article;
 
+	public Note() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public Note(NotePK notePK, float note, Scientist scientist, Article article) {
 		super();
 		this.notePK = notePK;
@@ -40,6 +45,7 @@ public class Note {
 		this.scientist = scientist;
 		this.article = article;
 	}
+	
 
 	public NotePK getNotePK() {
 		return notePK;

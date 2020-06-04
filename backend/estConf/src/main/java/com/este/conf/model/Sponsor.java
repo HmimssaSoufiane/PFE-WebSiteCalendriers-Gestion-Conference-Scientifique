@@ -23,6 +23,14 @@ public class Sponsor {
     public Sponsor() {
 		// TODO Auto-generated constructor stub
 	}
+    
+	public Sponsor(int idSponsor, String name, Byte[] logo) {
+		super();
+		IdSponsor = idSponsor;
+		this.name = name;
+		this.logo = logo;
+	}
+
 	public Sponsor(int idSponsor, String name, Byte[] logo, Set<Conference> conferences) {
 		super();
 		IdSponsor = idSponsor;
@@ -30,6 +38,7 @@ public class Sponsor {
 		this.logo = logo;
 		this.conferences = conferences;
 	}
+	
 
 	public int getIdSponsor() {
 		return IdSponsor;

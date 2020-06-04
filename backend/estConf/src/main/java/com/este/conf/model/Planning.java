@@ -29,6 +29,15 @@ public class Planning {
 	
 	
 	public Planning() {}
+	
+
+	public Planning(int idPlanning, String event, Date dateStar, Date dateEnd) {
+		super();
+		this.idPlanning = idPlanning;
+		this.event = event;
+		this.dateStar = dateStar;
+		this.dateEnd = dateEnd;
+	}
 
 
 	public Planning(int idPlanning, String event, Date dateStar, Date dateEnd, Conference conference) {
