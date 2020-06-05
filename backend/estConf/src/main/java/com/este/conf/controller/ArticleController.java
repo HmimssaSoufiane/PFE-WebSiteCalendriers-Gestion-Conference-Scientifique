@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.este.conf.dao.DaoArticle;
-import com.este.conf.model.Article;
+import com.este.conf.models.Article;
+import com.este.conf.repositories.ArticleRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/API/Article")
+@RequestMapping("/api/article")
 public class ArticleController {
 	
 	@Autowired
-	DaoArticle daoArticle;
+	ArticleRepository daoArticle;
 	//DaoCategorie daoCategorie;
 
 	@GetMapping("/articles")

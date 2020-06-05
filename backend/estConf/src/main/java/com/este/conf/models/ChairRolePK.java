@@ -1,4 +1,4 @@
-package com.este.conf.model;
+package com.este.conf.models;
 
 import java.io.Serializable;
 
@@ -8,35 +8,28 @@ import javax.persistence.Embeddable;
 
 @SuppressWarnings("serial")
 @Embeddable
-public class NotePK  implements Serializable {
-	
-	
+public class ChairRolePK implements Serializable {
     @Basic(optional = false)
-    @Column(name = "idArticle")
-    private int idArticle;
-    
+    @Column(name = "idConference")
+    private int idConference;
     @Basic(optional = false)
     @Column(name = "idPerson")
     private int idPerson;
-
     
-    
-	public NotePK() {
-		super();
-	}
+	public ChairRolePK () {}
 
-	public NotePK(int idArticle, int idPerson) {
+	public ChairRolePK(int idConference, int idPerson) {
 		super();
-		this.idArticle = idArticle;
+		this.idConference = idConference;
 		this.idPerson = idPerson;
 	}
 
-	public int getIdArticle() {
-		return idArticle;
+	public int getIdConference() {
+		return idConference;
 	}
 
-	public void setIdArticle(int idArticle) {
-		this.idArticle = idArticle;
+	public void setIdConference(int idConference) {
+		this.idConference = idConference;
 	}
 
 	public int getIdPerson() {
@@ -46,6 +39,7 @@ public class NotePK  implements Serializable {
 	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
-    
-    
+
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.este.conf.model;
+package com.este.conf.models;
 
 
 
