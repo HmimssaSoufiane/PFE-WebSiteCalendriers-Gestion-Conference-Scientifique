@@ -1,9 +1,8 @@
 package com.este.conf.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.este.conf.model.Chair;
 
-public interface DaoChair extends CrudRepository<Chair, Integer>{
+public interface DaoChair extends JpaRepository<Chair, Integer>{
 
 }

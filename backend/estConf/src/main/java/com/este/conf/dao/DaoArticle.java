@@ -1,9 +1,9 @@
 package com.este.conf.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.este.conf.model.Article;
 
-public interface DaoArticle extends CrudRepository<Article, Integer>  {
+public interface DaoArticle extends JpaRepository<Article, Integer>  {
 
 }
