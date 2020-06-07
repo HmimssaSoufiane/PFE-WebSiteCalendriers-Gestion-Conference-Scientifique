@@ -2,8 +2,10 @@ package com.este.conf.models;
 
 
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +51,8 @@ public class Article {
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	@MapKey(name = "idArticle")
-	private Set<Note> notesByScientist = new HashSet<>();
+	private SortedSet<Note> notesByScientist = new TreeSet<>();
+	
 	
 	public Article () {}
 	
@@ -136,7 +139,7 @@ public class Article {
 		return notesByScientist;
 	}
 
-	public void setNotesByScientist(Set<Note> notesByScientist) {
+	public void setNotesByScientist(SortedSet<Note> notesByScientist) {
 		this.notesByScientist = notesByScientist;
 	}
 	

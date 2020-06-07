@@ -1,8 +1,8 @@
 package com.este.conf.models;
 
-import java.util.HashSet;
-
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -17,7 +17,7 @@ public class Scientist extends Person {
 	private int nombreOfAtricleChecked;
 	@OneToMany(mappedBy = "scientist", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
-	private Set<Note> notes = new HashSet<>();
+	private SortedSet<Note> notes = new TreeSet<>();
 	
 	
 	public Scientist() {
@@ -33,7 +33,7 @@ public class Scientist extends Person {
 	public Set<Note> getNotes() {
 		return notes;
 	}
-	public void setNotes(Set<Note> notes) {
+	public void setNotes(SortedSet<Note> notes) {
 		this.notes = notes;
 	}
 	public int getNombreOfAtricleChecked() {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.este.conf.models.Chair;
@@ -23,7 +22,6 @@ public class ChairController {
 	
 	@Autowired
 	ChairRepository chairRepository;
-	//DaoCategorie daoCategorie;
 
 	@GetMapping("/chairs")
 	public List<Chair> getchairs() {
@@ -36,7 +34,7 @@ public class ChairController {
 	}
 
 	@PostMapping("/chairs") 
-	public @ResponseBody String addchairr(@RequestBody Chair chair) {
+	public String addchair(@RequestBody Chair chair) {
 
 		if (chair != null) {
 			chairRepository.save(chair);

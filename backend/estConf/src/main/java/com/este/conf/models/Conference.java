@@ -45,7 +45,8 @@ public class Conference {
 		
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
-	private Set<ChairRole> chairsRoles = new HashSet<>();
+	private SortedSet<ChairRole> chairsRoles = new TreeSet<>();
+
 	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
@@ -162,7 +163,7 @@ public class Conference {
 		return chairsRoles;
 	}
 
-	public void setChairsRoles(Set<ChairRole> chairsRoles) {
+	public void setChairsRoles(SortedSet<ChairRole> chairsRoles) {
 		this.chairsRoles = chairsRoles;
 	}
 

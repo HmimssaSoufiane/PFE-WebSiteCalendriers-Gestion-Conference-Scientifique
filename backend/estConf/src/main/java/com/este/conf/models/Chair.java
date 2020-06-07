@@ -1,6 +1,5 @@
 package com.este.conf.models;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -28,7 +27,7 @@ public class Chair extends Person {
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	@MapKey(name = "conference")
-	private Set<ChairRole> chairRoles = new HashSet<>();
+	private SortedSet<ChairRole> chairRoles = new TreeSet<>();
 	
 	
 	public Chair() {
@@ -49,7 +48,7 @@ public class Chair extends Person {
 	public Set<ChairRole> getChairRoles() {
 		return chairRoles;
 	}
-	public void setChairRoles(Set<ChairRole> chairRoles) {
+	public void setChairRoles(SortedSet<ChairRole> chairRoles) {
 		this.chairRoles = chairRoles;
 	}
 	
