@@ -19,8 +19,9 @@ public class Planning {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPlanning;
 	private String event ;
-	private Date dateStar;
-	private Date dateEnd;
+	private Date eventDay;
+	private Date timeStart;
+	private Date timeEnd;
 	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
@@ -29,24 +30,15 @@ public class Planning {
 	
 	
 	public Planning() {}
-	
 
-	public Planning(int idPlanning, String event, Date dateStar, Date dateEnd) {
+
+	public Planning(int idPlanning, String event, Date eventDay, Date timeStart, Date timeEnd) {
 		super();
 		this.idPlanning = idPlanning;
 		this.event = event;
-		this.dateStar = dateStar;
-		this.dateEnd = dateEnd;
-	}
-
-
-	public Planning(int idPlanning, String event, Date dateStar, Date dateEnd, Conference conference) {
-		super();
-		this.idPlanning = idPlanning;
-		this.event = event;
-		this.dateStar = dateStar;
-		this.dateEnd = dateEnd;
-		this.conference = conference;
+		this.eventDay = eventDay;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
 	}
 
 
@@ -70,23 +62,33 @@ public class Planning {
 	}
 
 
-	public Date getDateStar() {
-		return dateStar;
+	public Date getEventDay() {
+		return eventDay;
 	}
 
 
-	public void setDateStar(Date dateStar) {
-		this.dateStar = dateStar;
+	public void setEventDay(Date eventDay) {
+		this.eventDay = eventDay;
 	}
 
 
-	public Date getDateEnd() {
-		return dateEnd;
+	public Date getTimeStart() {
+		return timeStart;
 	}
 
 
-	public void setDateEnd(Date dateEnd) {
-		this.dateEnd = dateEnd;
+	public void setTimeStart(Date timeStart) {
+		this.timeStart = timeStart;
+	}
+
+
+	public Date getTimeEnd() {
+		return timeEnd;
+	}
+
+
+	public void setTimeEnd(Date timeEnd) {
+		this.timeEnd = timeEnd;
 	}
 
 
@@ -98,6 +100,8 @@ public class Planning {
 	public void setConference(Conference conference) {
 		this.conference = conference;
 	}
+	
+
 
 	
 	

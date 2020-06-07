@@ -14,7 +14,7 @@ import org.hibernate.annotations.CascadeType;
 public class Scientist extends Person {
 
 
-
+	private int nombreOfAtricleChecked;
 	@OneToMany(mappedBy = "scientist", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
 	private Set<Note> notes = new HashSet<>();
@@ -35,6 +35,12 @@ public class Scientist extends Person {
 	}
 	public void setNotes(Set<Note> notes) {
 		this.notes = notes;
+	}
+	public int getNombreOfAtricleChecked() {
+		return nombreOfAtricleChecked;
+	}
+	public void setNombreOfAtricleChecked(int nombreOfAtricleChecked) {
+		this.nombreOfAtricleChecked = nombreOfAtricleChecked;
 	}
 	
 	

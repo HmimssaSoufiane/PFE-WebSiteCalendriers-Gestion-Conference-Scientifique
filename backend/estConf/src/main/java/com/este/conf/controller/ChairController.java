@@ -1,6 +1,7 @@
 package com.este.conf.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,33 +13,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.este.conf.models.Article;
-import com.este.conf.repositories.ArticleRepository;
+import com.este.conf.models.Chair;
+import com.este.conf.repositories.ChairRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/article")
-public class ArticleController {
+@RequestMapping("/api/chair")
+public class ChairController {
 	
 	@Autowired
-	ArticleRepository articleRepository;
+	ChairRepository chairRepository;
 	//DaoCategorie daoCategorie;
 
-	@GetMapping("/articles")
-	public List<Article> getArticles() {
-		return articleRepository.findAll();
+	@GetMapping("/chairs")
+	public List<Chair> getchairs() {
+		return chairRepository.findAll();
 	}
 
-	@GetMapping("/articles/{id}")
-	public Article getArticle(@PathVariable int id) {
-		return articleRepository.findById(id).orElse(null);
+	@GetMapping("/chairs/{id}")
+	public Chair getchair(@PathVariable int id) {
+		return chairRepository.findById(id).orElse(null);
 	}
 
-	@PostMapping("/articles") 
-	public @ResponseBody String addArticler(@RequestBody Article article) {
+	@PostMapping("/chairs") 
+	public @ResponseBody String addchairr(@RequestBody Chair chair) {
 
-		if (article != null) {
-			articleRepository.save(article);
+		if (chair != null) {
+			chairRepository.save(chair);
 			return "Saved";
 		}
 		return "Errur";
@@ -46,9 +47,9 @@ public class ArticleController {
 
 
 
-	@DeleteMapping("/articles/{id}")
-	public String deleteArticle(@PathVariable int id) {
-		articleRepository.deleteById(id);
+	@DeleteMapping("/chairs/{id}")
+	public String deletechair(@PathVariable int id) {
+		chairRepository.deleteById(id);
 		return "Done";
 	}
 
