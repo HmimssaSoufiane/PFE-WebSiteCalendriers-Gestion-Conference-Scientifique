@@ -37,15 +37,14 @@ public class Chair extends Person {
 			String organizationName, String country, String region, String phone, String email, String password) {
 		super(idPerson, title, firstName, middleName, lastName, photo, organizationName, country, region, phone, email,
 				password);
-		// TODO Auto-generated constructor stub
-	}
+ 	}
 	public SortedSet<Conference> getCreatedConferences() {
 		return createdConferences;
 	}
 	public void setCreatedConferences(SortedSet<Conference> createdConferences) {
 		this.createdConferences = createdConferences;
 	}
-	public Set<ChairRole> getChairRoles() {
+	public SortedSet<ChairRole> getChairRoles() {
 		return chairRoles;
 	}
 	public void setChairRoles(SortedSet<ChairRole> chairRoles) {

@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.SortNatural;
 
 @Entity
 public class Scientist extends Person {
@@ -17,6 +18,7 @@ public class Scientist extends Person {
 	private int nombreOfAtricleChecked;
 	@OneToMany(mappedBy = "scientist", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
+	@SortNatural
 	private SortedSet<Note> notes = new TreeSet<>();
 	
 	

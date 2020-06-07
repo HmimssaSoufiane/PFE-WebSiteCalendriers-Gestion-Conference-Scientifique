@@ -1,8 +1,6 @@
 package com.este.conf.models;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -15,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -45,6 +44,7 @@ public class Conference {
 		
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
+	@SortNatural
 	private SortedSet<ChairRole> chairsRoles = new TreeSet<>();
 
 	
@@ -60,12 +60,14 @@ public class Conference {
         joinColumns = { @JoinColumn(name = "idConference") }, 
         inverseJoinColumns = { @JoinColumn(name = "idSponsor") }
     )
-    Set<Sponsor> sponsors = new HashSet<>();
+    @SortNatural
+    public SortedSet<Sponsor> sponsors = new TreeSet<>();
 	
 	public Conference () {}
 
 	public Conference(int idConference, String name, String shortName, String location, String about, String theme,
-			Date dateStar, Date dateEnd) {
+			Date dateStar, Date dateEnd, SortedSet<Article> articles, SortedSet<Planning> plannings,
+			SortedSet<ChairRole> chairsRoles, Chair creator, SortedSet<Sponsor> sponsors) {
 		super();
 		this.idConference = idConference;
 		this.name = name;
@@ -75,9 +77,12 @@ public class Conference {
 		this.theme = theme;
 		this.dateStar = dateStar;
 		this.dateEnd = dateEnd;
+		this.articles = articles;
+		this.plannings = plannings;
+		this.chairsRoles = chairsRoles;
+		this.creator = creator;
+		this.sponsors = sponsors;
 	}
-
-
 
 	public int getIdConference() {
 		return idConference;
@@ -159,7 +164,7 @@ public class Conference {
 		this.plannings = plannings;
 	}
 
-	public Set<ChairRole> getChairsRoles() {
+	public SortedSet<ChairRole> getChairsRoles() {
 		return chairsRoles;
 	}
 
@@ -175,13 +180,15 @@ public class Conference {
 		this.creator = creator;
 	}
 
-	public Set<Sponsor> getSponsors() {
+	public SortedSet<Sponsor> getSponsors() {
 		return sponsors;
 	}
 
-	public void setSponsors(Set<Sponsor> sponsors) {
+	public void setSponsors(SortedSet<Sponsor> sponsors) {
 		this.sponsors = sponsors;
 	}
+
+
 
 	
 }

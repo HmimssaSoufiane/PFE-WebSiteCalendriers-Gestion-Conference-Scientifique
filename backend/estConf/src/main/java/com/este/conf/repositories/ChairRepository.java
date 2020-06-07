@@ -8,4 +8,6 @@ import com.este.conf.models.Chair;
 @Repository
 public interface ChairRepository extends JpaRepository<Chair, Integer>{
 
+	public Chair findByEmail(String email);
+
 }
