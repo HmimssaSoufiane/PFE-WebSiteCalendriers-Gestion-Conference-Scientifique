@@ -10,8 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -63,11 +61,6 @@ function Header(props) {
                         </Hidden>
                         <Grid item xs />
                         <Grid item>
-                            <Link className={classes.link} href="#" variant="body2">
-                                Go to docs
-                            </Link>
-                        </Grid>
-                        <Grid item>
                             <Tooltip title="Alerts • No alerts">
                                 <IconButton color="inherit">
                                     <NotificationsIcon />
@@ -96,11 +89,7 @@ function Header(props) {
                                 Conference
                             </Typography>
                         </Grid>
-                        <Grid item>
-                            <Button className={classes.button} variant="outlined" color="inherit" size="small">
-                                Web setup
-                        </Button>
-                        </Grid>
+
                         <Grid item>
                             <Tooltip title="Help">
                                 <IconButton color="inherit">
@@ -117,12 +106,7 @@ function Header(props) {
                 position="static"
                 elevation={0}
             >
-                <Tabs value={0} textColor="inherit">
-                    <Tab textColor="inherit" label="My Conferences " />
-                    <Tab textColor="inherit" label="Page 2" />
-                    <Tab textColor="inherit" label="Page 3" />
-                    <Tab textColor="inherit" label="Page 4" />
-                </Tabs>
+
             </AppBar>
         </React.Fragment>
     );
