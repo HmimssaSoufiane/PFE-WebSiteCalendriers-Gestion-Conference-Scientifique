@@ -169,6 +169,21 @@ const styles = {
         padding: theme.spacing(2),
         background: '#eaeff1',
     },
+    item: {
+        paddingTop: 1,
+        paddingBottom: 1,
+        color: 'rgba(255, 255, 255, 0.7)',
+        '&:hover,&:focus': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        },
+    },
+    itemCategory: {
+        backgroundColor: '#232f3e',
+        boxShadow: '0 -1px 0 #404854 inset',
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+    },
+
 };
 function alertClicked() {
     alert('You clicked the third ListGroupItem');
@@ -181,9 +196,9 @@ function Paperbase(props) {
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
-                <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left" }}>
+                <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left", padding: "5px" }}>
 
-                    <ListItem className={clsx(classes.item, classes.itemCategory)}>
+                    <ListItem className={clsx(classes.item, classes.itemCategory)}  >
                         <ListItemIcon className={classes.itemIcon}>
                             <HomeIcon />
                         </ListItemIcon>
@@ -191,8 +206,8 @@ function Paperbase(props) {
                             Manage Overview
                         </ListItemText>
                     </ListItem>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
+                        <ListGroup.Item action href="#link1"  >
                             <PeopleIcon /> Conference
                         </ListGroup.Item>
                         <ListGroup.Item action href="#link2" >
