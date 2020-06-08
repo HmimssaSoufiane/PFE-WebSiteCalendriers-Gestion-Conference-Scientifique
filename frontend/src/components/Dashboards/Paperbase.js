@@ -2,9 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import ListGroup from 'react-bootstrap/ListGroup';
+import PeopleIcon from '@material-ui/icons/People';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import clsx from 'clsx';
+import HomeIcon from '@material-ui/icons/Home';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import PieChartIcon from '@material-ui/icons/PieChart';
+
+
 
 import Content from './Content';
 import Header from './Header';
@@ -160,7 +170,9 @@ const styles = {
         background: '#eaeff1',
     },
 };
-
+function alertClicked() {
+    alert('You clicked the third ListGroupItem');
+}
 function Paperbase(props) {
     const { classes } = props;
 
@@ -169,10 +181,27 @@ function Paperbase(props) {
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
-                <nav className={classes.drawer}>
+                <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left" }}>
 
-                    <Hidden xsDown implementation="css">
-                    </Hidden>
+                    <ListItem className={clsx(classes.item, classes.itemCategory)}>
+                        <ListItemIcon className={classes.itemIcon}>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText classes={{ primary: classes.itemPrimary, }} >
+                            Manage Overview
+                        </ListItemText>
+                    </ListItem>
+                    <ListGroup defaultActiveKey="#link1">
+                        <ListGroup.Item action href="#link1">
+                            <PeopleIcon /> Conference
+                        </ListGroup.Item>
+                        <ListGroup.Item action href="#link2" >
+                            <CalendarTodayIcon /> Planning
+                        </ListGroup.Item>
+                        <ListGroup.Item action onClick={alertClicked}>
+                            <PieChartIcon /> Analytics
+                        </ListGroup.Item>
+                    </ListGroup>
                 </nav>
                 <div className={classes.app}>
                     <Header />
@@ -184,7 +213,7 @@ function Paperbase(props) {
                     </footer>
                 </div>
             </div>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 }
 
