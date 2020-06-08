@@ -58,12 +58,12 @@ export default function SignIn() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        //var raw = JSON.stringify({ "email": email, "password": password });
+        var raw = JSON.stringify({ "email": email, "password": password });
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({ "email": "Harebo@gmail.com", "password": "Este@2020" });
+        //var raw = JSON.stringify({ "email": "Harebo@gmail.com", "password": "Este@2020" });
 
         var requestOptions = {
             method: 'POST',
@@ -76,6 +76,7 @@ export default function SignIn() {
             .then(response => response.text())
             .then(result => {
                 console.log(JSON.parse(result));
+                setClient(result);
                 if (result !== "") console.log("not emty");
                 else console.log("emty");
             })
@@ -100,49 +101,25 @@ export default function SignIn() {
                     Sign in
         </Typography>
                 <form className={classes.form} onSubmit={handleSubmit} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
+                    <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus
                         onChange={e => {
                             setEmail(e.target.value);
                         }}
                     />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
+                    <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"
                         onChange={e => {
                             setPassword(e.target.value);
                         }}
                     />
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
+                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} >
                         Sign In
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
-                    </Link>
+                            </Link>
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
