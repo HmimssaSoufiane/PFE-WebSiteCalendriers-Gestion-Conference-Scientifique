@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import HomeIcon from '@material-ui/icons/Home';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import PieChartIcon from '@material-ui/icons/PieChart';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 
 
@@ -198,7 +199,7 @@ function Paperbase(props) {
                 <CssBaseline />
                 <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left", padding: "5px" }}>
 
-                    <ListItem className={clsx(classes.item, classes.itemCategory)}  >
+                    <ListItem style={{ borderRadius: "5px" }} className={clsx(classes.item, classes.itemCategory)}  >
                         <ListItemIcon className={classes.itemIcon}>
                             <HomeIcon />
                         </ListItemIcon>
@@ -208,9 +209,12 @@ function Paperbase(props) {
                     </ListItem>
                     <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
                         <ListGroup.Item action href="#link1"  >
-                            <PeopleIcon /> Conference
+                            <PeopleIcon /> My Conferences
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="#link2"  >
+                            <AddCircleOutlineIcon /> Create Conference
+                        </ListGroup.Item>
+                        <ListGroup.Item action href="#link3" >
                             <CalendarTodayIcon /> Planning
                         </ListGroup.Item>
                         <ListGroup.Item action onClick={alertClicked}>
