@@ -12,7 +12,7 @@ import clsx from 'clsx';
 import ContentMyConferences from './ContectMyConferences';
 import ContectMyArticles from './ContectMyArticles';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-
+import PublishIcon from '@material-ui/icons/Publish';
 import Header from './Header';
 
 function Copyright() {
@@ -213,7 +213,7 @@ function Paperbase(props) {
                             <PeopleIcon /> My Conferences
                         </ListGroup.Item>
                         <ListGroup.Item action href="#link2" name="link2" onClick={handleChangeContent}  >
-                            <PictureAsPdfIcon /> Submit new articles
+                            <PublishIcon /> Submit new articles
                         </ListGroup.Item>
                         <ListGroup.Item action href="#link3" name="link3" onClick={handleChangeContent}  >
                             <PictureAsPdfIcon /> My Articles
