@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,17 +7,15 @@ import Link from '@material-ui/core/Link';
 import ListGroup from 'react-bootstrap/ListGroup';
 import PeopleIcon from '@material-ui/icons/People';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import clsx from 'clsx';
-import HomeIcon from '@material-ui/icons/Home';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
-
-
-import Content from './Content';
+import ContentAnalytics from './ContentAnalytics';
+import ContentCreateConference from './ContentCreateConference';
+import ContentPlanning from './ContentPlanning';
+import ContentMyConferences from './ContectMyConferences';
 import Header from './Header';
 
 function Copyright() {
@@ -186,11 +184,19 @@ const styles = {
     },
 
 };
-function alertClicked() {
-    alert('You clicked the third ListGroupItem');
-}
+
 function Paperbase(props) {
     const { classes } = props;
+    const [whichContent, setWhichContent] = useState("link1");
+
+    const handleChangeContent = (e) => {
+
+        if (e.target.name === "link1") { setWhichContent("link1"); }
+        else if (e.target.name === "link2") { setWhichContent("link2"); }
+        else if (e.target.name === "link3") { setWhichContent("link3"); }
+        else if (e.target.name === "link4") { setWhichContent("link4"); }
+    }
+
 
 
     return (
@@ -200,24 +206,22 @@ function Paperbase(props) {
                 <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left", padding: "5px" }}>
 
                     <ListItem style={{ borderRadius: "5px" }} className={clsx(classes.item, classes.itemCategory)}  >
-                        <ListItemIcon className={classes.itemIcon}>
-                            <HomeIcon />
-                        </ListItemIcon>
+
                         <ListItemText classes={{ primary: classes.itemPrimary, }} >
-                            Manage Overview
+                            Chair Dashboards
                         </ListItemText>
                     </ListItem>
                     <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
-                        <ListGroup.Item action href="#link1"  >
+                        <ListGroup.Item action href="#link1" name="link1" onClick={handleChangeContent} >
                             <PeopleIcon /> My Conferences
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2"  >
+                        <ListGroup.Item action href="#link2" name="link2" onClick={handleChangeContent}  >
                             <AddCircleOutlineIcon /> Create Conference
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" >
+                        <ListGroup.Item action href="#link3" name="link3" onClick={handleChangeContent} >
                             <CalendarTodayIcon /> Planning
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={alertClicked}>
+                        <ListGroup.Item action href="#link4" name="link4" onClick={handleChangeContent} >
                             <PieChartIcon /> Analytics
                         </ListGroup.Item>
                     </ListGroup>
@@ -225,13 +229,17 @@ function Paperbase(props) {
                 <div className={classes.app}>
                     <Header />
                     <main className={classes.main}>
-                        <Content />
+                        {
+                            (whichContent === "link1") ? <ContentMyConferences /> :
+                                (whichContent === "link2") ? <ContentCreateConference /> :
+                                    (whichContent === "link3") ? <ContentPlanning /> : <ContentAnalytics />}
                     </main>
                     <footer className={classes.footer}>
                         <Copyright />
                     </footer>
                 </div>
             </div>
+
         </ThemeProvider >
     );
 }
