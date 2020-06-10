@@ -205,7 +205,7 @@ function Paperbase(props) {
                     <ListItem style={{ borderRadius: "5px" }} className={clsx(classes.item, classes.itemCategory)}  >
 
                         <ListItemText classes={{ primary: classes.itemPrimary, }} >
-                            Chair Dashboards
+                            Author Dashboards
                         </ListItemText>
                     </ListItem>
                     <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >

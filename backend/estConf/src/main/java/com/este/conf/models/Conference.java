@@ -25,9 +25,11 @@ public class Conference {
 	private int idConference;
 	private String name;
 	private String shortName;
-	private String location;
+	private String contry;
+	private String city;
+	private String adress;
 	private String about;
-	private String theme;
+	private String disciplines;
 	private Date dateStar;
 	private Date dateEnd;
  	
@@ -63,17 +65,20 @@ public class Conference {
     public SortedSet<Sponsor> sponsors = new TreeSet<>();
 	
 	public Conference () {}
-
-	public Conference(int idConference, String name, String shortName, String location, String about, String theme,
-			Date dateStar, Date dateEnd, SortedSet<Article> articles, SortedSet<Planning> plannings,
-			SortedSet<ChairRole> chairsRoles, Chair creator, SortedSet<Sponsor> sponsors) {
+	
+	public Conference(int idConference, String name, String shortName, String contry, String city, String adress,
+			String about, String disciplines, Date dateStar, Date dateEnd, SortedSet<Article> articles,
+			SortedSet<Planning> plannings, SortedSet<ChairRole> chairsRoles, Chair creator,
+			SortedSet<Sponsor> sponsors) {
 		super();
 		this.idConference = idConference;
 		this.name = name;
 		this.shortName = shortName;
-		this.location = location;
+		this.contry = contry;
+		this.city = city;
+		this.adress = adress;
 		this.about = about;
-		this.theme = theme;
+		this.disciplines = disciplines;
 		this.dateStar = dateStar;
 		this.dateEnd = dateEnd;
 		this.articles = articles;
@@ -106,14 +111,7 @@ public class Conference {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
+ 
 
 	public String getAbout() {
 		return about;
@@ -123,13 +121,6 @@ public class Conference {
 		this.about = about;
 	}
 
-	public String getTheme() {
-		return theme;
-	}
-
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
 
 	public Date getDateStar() {
 		return dateStar;
@@ -185,6 +176,50 @@ public class Conference {
 
 	public void setSponsors(SortedSet<Sponsor> sponsors) {
 		this.sponsors = sponsors;
+	}
+
+	public String getContry() {
+		return contry;
+	}
+
+	public void setContry(String contry) {
+		this.contry = contry;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+
+
+
+
+
+
+	public String getDisciplines() {
+		return disciplines;
+	}
+
+
+
+
+
+
+
+	public void setDisciplines(String disciplines) {
+		this.disciplines = disciplines;
 	}
 
 

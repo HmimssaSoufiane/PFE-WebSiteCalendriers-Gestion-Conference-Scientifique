@@ -21,8 +21,6 @@ function App() {
         <Route path="/DashboardsChair" component={DashboardsChair} />
         <Route path="/DashboardsAuthor" component={MainDashboadAuthor} />
         <Route path="/DashboardsScientist" component={DashboardsScientist} />
-
-
       </Router>
     </div>
   );
