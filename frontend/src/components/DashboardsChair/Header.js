@@ -85,8 +85,8 @@ function Header(props) {
                 <Toolbar>
                     <Grid container alignItems="center" spacing={1}>
                         <Grid item xs>
-                            <Typography color="inherit" variant="h5" component="h1">
-                                Conference
+                            <Typography style={{ textAlign: "left", paddingLeft: "5px" }} color="inherit" variant="h5" component="h1">
+                                ESTEConference
                             </Typography>
                         </Grid>
                         <Grid item>

@@ -17,7 +17,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = (theme) => ({
     paper: {
@@ -44,7 +44,12 @@ const styles = (theme) => ({
 
 function Content(props) {
     const { classes } = props;
-    const [conferences, setConferences] = useState([]);
+    const [conferences, setConferences] = useState([
+        { name: "Computers and Computation Conference", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+        { name: "Advances in Animal Anatomy and Wild Animals Conference", shortName: "ICAAAWA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+        { name: "Advances in Aquafarming Conference", shortName: "ICAA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+        { name: "Autograft, Allograft, Isograft and Xenograft in Surgery Conference", shortName: "ICAAIXS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+        { name: " Autonomous Agents and Multi-Agent Systems Conference", shortName: "ICAAMAS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" }]);
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -86,30 +91,31 @@ function Content(props) {
                 <TableContainer component={Paper} >
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
-                            <TableRow>
+                            <TableRow style={{ textAlign: "left", background: "#009be5" }}>
                                 <TableCell>Name</TableCell>
-                                <TableCell align="right">Short Name</TableCell>
-                                <TableCell align="right">Location</TableCell>
+                                <TableCell >Short Name</TableCell>
+                                <TableCell>Location</TableCell>
                                 <TableCell align="right">Date star</TableCell>
                                 <TableCell align="right">Date end </TableCell>
+                                <TableCell >Edit </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {conferences.map(row => (
-                                <TableRow key={row.idConference}>
-                                    <TableCell align="right">{row.name}</TableCell>
-                                    <TableCell align="right">{row.shortName}</TableCell>
-                                    <TableCell align="right">{row.location}</TableCell>
+                                <TableRow style={{ textAlign: "left", background: "lightblue" }} key={row.idConference}>
+                                    <TableCell>{row.name}</TableCell>
+                                    <TableCell >{row.shortName}</TableCell>
+                                    <TableCell >{row.location}</TableCell>
                                     <TableCell align="right">{row.dateStar}</TableCell>
                                     <TableCell align="right">{row.dateEnd}</TableCell>
-                                    <TableCell align="right">
+                                    <TableCell >
                                         <Button
                                             variant="contained"
                                             color="secondary"
                                             className={classes.button}
-                                            startIcon={<ShoppingCartIcon />}
+                                            startIcon={<EditIcon />}
                                         >
-                                            Ajouter au panier
+                                            Edit
                                         </Button>
                                     </TableCell>
                                 </TableRow>

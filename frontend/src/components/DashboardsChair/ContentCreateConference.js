@@ -5,9 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import Form from 'react-bootstrap/Form'
 import { withStyles } from '@material-ui/core/styles';
 import { Col } from 'react-bootstrap';
-import Typography from '@material-ui/core/Typography';
-import { blue } from '@material-ui/core/colors';
 import Button from 'react-bootstrap/Button'
+import Toolbar from '@material-ui/core/Toolbar';
+
 
 
 
@@ -63,18 +63,14 @@ function Content(props) {
 
     return (
         <Paper className={classes.paper}>
-            <AppBar className={classes.searchBar} position="static" color="default" elevation={0}>
-
+            <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
+                <Toolbar>
+                    <h2 style={{ padding: "10px 0  5px 0", color: "white" }}>Create Conference</h2>
+                </Toolbar>
             </AppBar>
 
             <div className={classes.contentWrapper}>
-                <div className={classes.paper}>
 
-                    <Typography component="h1" variant="h5" style={{ paddingBottom: "20px" }}>
-                        Create Conference
-                    </Typography>
-
-                </div>
                 <Form style={{ textAlign: "left" }}>
                     <Form.Row>
                         <Form.Group as={Col} >

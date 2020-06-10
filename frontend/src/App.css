@@ -2,7 +2,11 @@
   text-align: center;
   height: 100vh;
 }
-
+.Content-paper-13 ,.Content-paper-19  {
+  margin: auto;
+  overflow: hidden;
+  min-width: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
