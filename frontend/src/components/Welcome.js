@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from '../asset/logo.png'; // with import
+import home_banner from '../asset/Home_banner.jpg'; // with import
 
 
 function Copyright() {
@@ -78,14 +79,26 @@ export default function Album() {
                 <Navbar.Brand href="#home">EsteConference</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href="/home">Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
+                    <Nav.Link href="#features">Contact</Nav.Link>
+                    <Nav.Link href="#pricing">About us</Nav.Link>
+                </Nav>
+                <Nav className="justify-content-end" activeKey="/home">
+                    <Nav.Item>
+                        <Nav.Link href="/home">LogIn</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-1">SingUp</Nav.Link>
+                    </Nav.Item>
                 </Nav>
 
             </Navbar>
             <main>
                 {/* Hero unit */}
-                <div className={classes.heroContent}>
+                <div style={{
+                    backgroundImage: "url(" + home_banner + ")", backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'noRepeat'
+                }} className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                             Album layout
