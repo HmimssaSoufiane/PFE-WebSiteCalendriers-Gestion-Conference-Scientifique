@@ -51,7 +51,7 @@ public class Conference {
 	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
-	@JoinColumn(name="idPerson")
+	@JoinColumn(name="idCreator")
 	private Chair creator;
 	
     @ManyToMany

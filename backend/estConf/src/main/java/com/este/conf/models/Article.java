@@ -39,7 +39,7 @@ public class Article {
 	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
-	@JoinColumn(name="idPerson")
+	@JoinColumn(name="idAuthor")
 	private Author author;
  	
 	@ManyToOne

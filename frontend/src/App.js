@@ -7,6 +7,8 @@ import SignUp from './components/SignUp';
 import DashboardsChair from './components/DashboardsChair/MainDashboadChair';
 import MainDashboadAuthor from './components/DashboardsAuthor/MainDashboadAuthor';
 import DashboardsScientist from './components/DashboardsScientist/MainDashboadScientist';
+import ConferanceDetails from './components/ConferanceDetails'
+import SubmitAnArticle from './components/SubmitAnArticle';;
 
 
 
@@ -21,6 +23,9 @@ function App() {
         <Route path="/DashboardsChair" component={DashboardsChair} />
         <Route path="/DashboardsAuthor" component={MainDashboadAuthor} />
         <Route path="/DashboardsScientist" component={DashboardsScientist} />
+        <Route path="/ConferanceDetails" component={ConferanceDetails} />
+        <Route path="/SubmitAnArticle" component={SubmitAnArticle} />
+
       </Router>
     </div>
   );

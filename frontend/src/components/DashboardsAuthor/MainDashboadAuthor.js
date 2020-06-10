@@ -218,7 +218,6 @@ function Paperbase(props) {
                         <ListGroup.Item action href="#link3" name="link3" onClick={handleChangeContent}  >
                             <PictureAsPdfIcon /> My Articles
                         </ListGroup.Item>
-
                     </ListGroup>
                 </nav>
                 <div className={classes.app}>

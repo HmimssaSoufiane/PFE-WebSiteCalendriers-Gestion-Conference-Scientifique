@@ -58,16 +58,7 @@ function Content(props) {
                                 }}
                             />
                         </Grid>
-                        <Grid item>
-                            <Button variant="contained" color="primary" className={classes.addUser}>
-                                Create Conference
-                            </Button>
-                            <Tooltip title="Reload">
-                                <IconButton>
-                                    <RefreshIcon className={classes.block} color="inherit" />
-                                </IconButton>
-                            </Tooltip>
-                        </Grid>
+
                     </Grid>
                 </Toolbar>
             </AppBar>

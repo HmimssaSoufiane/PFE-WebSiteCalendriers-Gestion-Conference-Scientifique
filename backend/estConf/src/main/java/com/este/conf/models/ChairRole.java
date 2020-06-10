@@ -16,7 +16,7 @@ public class ChairRole {
 	private String role;
 	
 	@ManyToOne
-	@JoinColumn(name = "idPerson", insertable = false, updatable = false)
+	@JoinColumn(name = "idChair", insertable = false, updatable = false)
 	@Cascade(value = { CascadeType.ALL })
 	private Chair chair;
 	
