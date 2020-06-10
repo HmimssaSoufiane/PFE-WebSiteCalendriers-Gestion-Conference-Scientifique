@@ -15,6 +15,14 @@ import home_banner from '../asset/Home_banner.jpg'; // with import
 import Toolbar from '@material-ui/core/Toolbar';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import EditIcon from '@material-ui/icons/Edit';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -23,8 +31,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Nav.Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Nav.Link color="inherit" href="https://github.com/HmimssaSoufiane">
+                By Hmimssa
             </Nav.Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -64,7 +72,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const conferences = [
+    { name: "Computers and Computation Conference", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+    { name: "Advances in Animal Anatomy and Wild Animals Conference", shortName: "ICAAAWA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+    { name: "Advances in Aquafarming Conference", shortName: "ICAA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+    { name: "Autograft, Allograft, Isograft and Xenograft in Surgery Conference", shortName: "ICAAIXS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
+    { name: " Autonomous Agents and Multi-Agent Systems Conference", shortName: "ICAAMAS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" }
+];
 
 export default function Album() {
     const classes = useStyles();
@@ -129,47 +143,46 @@ export default function Album() {
                         </Toolbar>
                     </Container>
                 </div>
-                <Container className={classes.cardGrid} maxWidth="md">
+                <Container className={classes.cardGrid}>
                     {/* End hero unit */}
-                    <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={6} md={4}>
-                                <Card className={classes.card}>
-                                    <CardMedia
-                                        className={classes.cardMedia}
-                                        image="https://source.unsplash.com/random"
-                                        title="Image title"
-                                    />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Heading
-                                    </Typography>
-                                        <Typography>
-                                            This is a media card. You can use this section to describe the content.
-                                    </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" color="primary">
-                                            View
+                    <TableContainer component={Paper} >
+                        <Table className={classes.table} aria-label="simple table" style={{ padding: "20px", borderCollapse: "separate", borderSpacing: "0 15px" }}>
+
+                            <TableBody>
+                                {conferences.map(row => (
+                                    <TableRow style={{ textAlign: "left", background: "#f3f4f6" }} key={row.idConference}>
+                                        <TableCell style={{ borderRadius: "10px 0 0 10px", fontWeight: "bold" }}>{row.name}</TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }}>{row.shortName}</TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }}>{row.location}</TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }} align="right">{row.dateStar}</TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }} align="right">{row.dateEnd}</TableCell>
+                                        <TableCell style={{ borderRadius: "0 10px 10px 0" }} >
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                className={classes.button}
+                                            >
+                                                View
                                         </Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Container>
             </main>
             {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
                     Footer
-        </Typography>
+                </Typography>
                 <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
                     Something here to give the footer a purpose!
-        </Typography>
+                </Typography>
                 <Copyright />
             </footer>
             {/* End footer */}
-        </React.Fragment>
+        </React.Fragment >
     );
 }
