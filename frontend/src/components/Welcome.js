@@ -1,9 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,10 +15,11 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import EditIcon from '@material-ui/icons/Edit';
 import Paper from '@material-ui/core/Paper';
+import Image from 'react-bootstrap/Image';
+import { Col } from 'react-bootstrap';
+
 
 
 
@@ -119,7 +116,7 @@ export default function Album() {
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
                 }} className={classes.heroContent}>
-                    <Container maxWidth="sm">
+                    <Container maxWidth="sm" style={{ paddingTop: "50px" }}>
 
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
 
@@ -151,7 +148,12 @@ export default function Album() {
                             <TableBody>
                                 {conferences.map(row => (
                                     <TableRow style={{ textAlign: "left", background: "#f3f4f6" }} key={row.idConference}>
-                                        <TableCell style={{ borderRadius: "10px 0 0 10px", fontWeight: "bold" }}>{row.name}</TableCell>
+                                        <TableCell style={{ borderRadius: "10px 0 0 10px", fontWeight: "bold" }}>
+                                            <Col xs={6} md={4}>
+                                                <Image src={logo} roundedCircle width="80px" />
+                                            </Col>
+                                        </TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }}>{row.name}</TableCell>
                                         <TableCell style={{ fontWeight: "bold" }}>{row.shortName}</TableCell>
                                         <TableCell style={{ fontWeight: "bold" }}>{row.location}</TableCell>
                                         <TableCell style={{ fontWeight: "bold" }} align="right">{row.dateStar}</TableCell>
