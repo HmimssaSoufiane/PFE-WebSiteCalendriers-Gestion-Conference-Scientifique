@@ -12,6 +12,11 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from '../asset/logo.png'; // with import
 import home_banner from '../asset/Home_banner.jpg'; // with import
+import Toolbar from '@material-ui/core/Toolbar';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+
+
 
 
 function Copyright() {
@@ -95,33 +100,33 @@ export default function Album() {
             <main>
                 {/* Hero unit */}
                 <div style={{
+                    height: "400px",
                     backgroundImage: "url(" + home_banner + ")", backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'noRepeat'
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
                 }} className={classes.heroContent}>
                     <Container maxWidth="sm">
-                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                            Album layout
-                        </Typography>
+
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            Something short and leading about the collection below—its contents, the creator, etc.
-                            Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-                            entirely.
+
                         </Typography>
-                        <div className={classes.heroButtons}>
-                            <Grid container spacing={2} justify="center">
+                        <Toolbar style={{ borderRadius: "11px 10px 10px 10px", border: "1px solid #e9eaee", background: "white", opacity: "06" }}>
+                            <Grid container spacing={2} alignItems="center">
                                 <Grid item>
-                                    <Button variant="contained" color="primary">
-                                        Main call to action
-                                    </Button>
+                                    <SearchIcon className={classes.block} color="inherit" />
                                 </Grid>
-                                <Grid item>
-                                    <Button variant="outlined" color="primary">
-                                        Secondary action
-                                   </Button>
+                                <Grid item xs>
+                                    <TextField
+                                        fullWidth
+                                        placeholder="Search by conference name "
+                                        InputProps={{
+                                            disableUnderline: true,
+                                            className: classes.searchInput,
+                                        }}
+                                    />
                                 </Grid>
                             </Grid>
-                        </div>
+                        </Toolbar>
                     </Container>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
