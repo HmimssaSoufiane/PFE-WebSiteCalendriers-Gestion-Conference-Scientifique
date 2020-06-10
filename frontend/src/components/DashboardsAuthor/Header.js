@@ -12,6 +12,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -83,11 +85,15 @@ function Header(props) {
                 <Toolbar>
                     <Grid container alignItems="center" spacing={1}>
                         <Grid item xs>
-                            <Typography color="inherit" variant="h5" component="h1">
-                                Conference ESTE
+                            <Typography style={{ textAlign: "left", paddingLeft: "5px" }} color="inherit" variant="h5" component="h1">
+                                ESTEConference
                             </Typography>
                         </Grid>
-
+                        <Grid item>
+                            <Button className={classes.button} variant="outlined" color="inherit" size="small">
+                                Logout
+                            </Button>
+                        </Grid>
                         <Grid item>
                             <Tooltip title="Help">
                                 <IconButton color="inherit">
