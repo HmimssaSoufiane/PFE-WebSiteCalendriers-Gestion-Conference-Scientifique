@@ -34,7 +34,7 @@ public class Conference implements Comparable<Conference> {
 	@Lob
 	@Column(length = 100000)
 	private String about;
-	private String disciplines;
+	private String discipline;
 	private Date dateStar;
 	private Date dateEnd;
 
@@ -70,7 +70,7 @@ public class Conference implements Comparable<Conference> {
 	}
 
 	public Conference(int idConference, String name, String shortName, String contry, String city, String adress,
-			String about, String disciplines, Date dateStar, Date dateEnd) {
+			String about, String discipline, Date dateStar, Date dateEnd) {
 		super();
 		this.idConference = idConference;
 		this.name = name;
@@ -79,7 +79,7 @@ public class Conference implements Comparable<Conference> {
 		this.city = city;
 		this.adress = adress;
 		this.about = about;
-		this.disciplines = disciplines;
+		this.discipline = discipline;
 		this.dateStar = dateStar;
 		this.dateEnd = dateEnd;
 	}
@@ -140,12 +140,12 @@ public class Conference implements Comparable<Conference> {
 		this.about = about;
 	}
 
-	public String getDisciplines() {
-		return disciplines;
+	public String getDiscipline() {
+		return discipline;
 	}
 
-	public void setDisciplines(String disciplines) {
-		this.disciplines = disciplines;
+	public void setDiscipline(String discipline) {
+		this.discipline = discipline;
 	}
 
 	public Date getDateStar() {

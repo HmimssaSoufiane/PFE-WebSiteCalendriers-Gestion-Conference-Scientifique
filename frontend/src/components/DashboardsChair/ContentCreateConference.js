@@ -36,30 +36,51 @@ const styles = (theme) => ({
 
 function Content(props) {
     const { classes } = props;
-    const [conferences, setConferences] = useState([]);
     const [name, setName] = useState("");
     const [shortName, setShortName] = useState("");
     const [contry, setContry] = useState("");
     const [city, setCity] = useState('');
     const [adress, setAdress] = useState("");
     const [about, setAbout] = useState("");
-    const [theme, setTheme] = useState("");
-    const [dateStart, setStar] = useState("");
-    const [dateEnd, setEnd] = useState("");
-
-
-
-    const handleChange = (event) => {
-    };
+    const [discipline, setDiscipline] = useState("");
+    const [dateStart, setDateStar] = useState("");
+    const [dateEnd, setDateEnd] = useState("");
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "name": name,
+            "shortName": shortName,
+            "contry": contry,
+            "city": city,
+            "adress": adress,
+            "about": about,
+            "discipline": discipline,
+            "dateStar": dateStart,
+            "dateEnd": dateEnd,
+            "articles": null,
+            "plannings": null,
+            "chairsRoles": null,
+            "sponsors": null
+        });
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/api/chair/chairs/1/conference", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
-    useEffect(() => {
-        // Update the document title using the browser API
 
-    });
 
     return (
         <Paper className={classes.paper}>
@@ -71,23 +92,35 @@ function Content(props) {
 
             <div className={classes.contentWrapper}>
 
-                <Form style={{ textAlign: "left" }}>
+                <Form style={{ textAlign: "left" }} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>Coference name</Form.Label>
-                            <Form.Control type="text" placeholder="Coference name" />
+                            <Form.Control type="text" placeholder="Coference name" onChange={e => {
+                                setName(e.target.value);
+                            }} />
                         </Form.Group>
 
                         <Form.Group as={Col} >
                             <Form.Label>Conference abbreviation </Form.Label>
-                            <Form.Control type="text" placeholder="Conference abbreviation" />
+                            <Form.Control type="text" placeholder="Conference abbreviation" onChange={e => {
+                                setShortName(e.target.value);
+                            }} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>Conference Disciplines</Form.Label>
-                            <Form.Control as="select" value="Choose...">
-                                <option>Choose...</option>
-                                <option>...</option>
+                            <Form.Control as="select" on value={discipline} onChange={e => {
+                                setDiscipline(e.target.value);
+                            }} >
+                                <option >addictions nursing</option>
+                                <option>applied physics</option>
+                                <option>applied mathematics</option>
+                                <option>computational mechanics</option>
+                                <option>computer architecture</option>
+                                <option>computer networks</option>
+                                <option>computer vision</option>
+                                <option>computer science</option>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
@@ -97,6 +130,9 @@ function Content(props) {
                             <Form.Control
                                 type="date"
                                 style={{ width: '100%' }}
+                                onChange={e => {
+                                    setDateStar(e.target.value);
+                                }}
                             />
                         </Form.Group>
 
@@ -104,6 +140,9 @@ function Content(props) {
                             <Form.Label>Date End</Form.Label>
                             <Form.Control
                                 type="date"
+                                onChange={e => {
+                                    setDateEnd(e.target.value);
+                                }}
                                 style={{ width: '100%' }}
                             />
                         </Form.Group>
@@ -112,26 +151,31 @@ function Content(props) {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>County</Form.Label>
-                            <Form.Control as="select" defaultValue="Choose...">
-                                <option>County</option>
-                                <option></option>
-                            </Form.Control>
+                            <Form.Control onChange={e => {
+                                setContry(e.target.value);
+                            }} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCity">
                             <Form.Label>City</Form.Label>
-                            <Form.Control />
+                            <Form.Control onChange={e => {
+                                setCity(e.target.value);
+                            }} />
                         </Form.Group>
 
                     </Form.Row>
 
                     <Form.Group controlId="formGridAddress1">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control placeholder="1234 Main St" />
+                        <Form.Control placeholder="1234 Main St" onChange={e => {
+                            setAdress(e.target.value);
+                        }} />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>About</Form.Label>
-                        <Form.Control as="textarea" rows="3" />
+                        <Form.Control as="textarea" rows="3" onChange={e => {
+                            setAbout(e.target.value);
+                        }} />
                     </Form.Group>
 
 
