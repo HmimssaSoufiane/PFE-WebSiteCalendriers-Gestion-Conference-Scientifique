@@ -61,10 +61,9 @@ public class ChairController {
 		if (chair != null) {
 			
 			conference.setCreator(chair);
-			//chair.getCreatedConferences().add(conference);			
-			
-			conferenceRepository.save(conference);
-			//chairRepository.save(chair);
+			chair.getCreatedConferences().add(conference);			
+			//conferenceRepository.save(conference);
+			chairRepository.save(chair);
 			
 			
 			
