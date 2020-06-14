@@ -1,15 +1,16 @@
 package com.este.conf.models;
 
 import java.util.Date;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,8 +19,10 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class Conference {
+public class Conference implements Comparable<Conference> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idConference;
@@ -28,48 +31,46 @@ public class Conference {
 	private String contry;
 	private String city;
 	private String adress;
+	@Lob
+	@Column(length = 100000)
 	private String about;
 	private String disciplines;
 	private Date dateStar;
 	private Date dateEnd;
- 	
+
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private SortedSet<Article> articles = new TreeSet<>();
-	
+	private Set<Article> articles;
+
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private SortedSet<Planning> plannings = new TreeSet<>();
-		
+	private Set<Planning> plannings ;
+
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private SortedSet<ChairRole> chairsRoles = new TreeSet<>();
+	private Set<ChairRole> chairsRoles;
 
-	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
-	@JoinColumn(name="idCreator")
+	@JoinColumn(name = "idCreator")
+	@JsonIgnoreProperties("createdConferences")
 	private Chair creator;
-	
-    @ManyToMany
-    @Cascade(value = { CascadeType.ALL })
-    @JoinTable(
-        name = "conference_sponsor", 
-        joinColumns = { @JoinColumn(name = "idConference") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idSponsor") }
-    )
-    @SortNatural
-    public SortedSet<Sponsor> sponsors = new TreeSet<>();
-	
-	public Conference () {}
-	
+
+	@ManyToMany
+	@Cascade(value = { CascadeType.ALL })
+	@JoinTable(name = "conference_sponsor", joinColumns = { @JoinColumn(name = "idConference") }, inverseJoinColumns = {
+			@JoinColumn(name = "idSponsor") })
+	@SortNatural
+	public Set<Sponsor> sponsors ;
+
+	public Conference() {
+	}
+
 	public Conference(int idConference, String name, String shortName, String contry, String city, String adress,
-			String about, String disciplines, Date dateStar, Date dateEnd, SortedSet<Article> articles,
-			SortedSet<Planning> plannings, SortedSet<ChairRole> chairsRoles, Chair creator,
-			SortedSet<Sponsor> sponsors) {
+			String about, String disciplines, Date dateStar, Date dateEnd) {
 		super();
 		this.idConference = idConference;
 		this.name = name;
@@ -81,11 +82,6 @@ public class Conference {
 		this.disciplines = disciplines;
 		this.dateStar = dateStar;
 		this.dateEnd = dateEnd;
-		this.articles = articles;
-		this.plannings = plannings;
-		this.chairsRoles = chairsRoles;
-		this.creator = creator;
-		this.sponsors = sponsors;
 	}
 
 	public int getIdConference() {
@@ -110,72 +106,6 @@ public class Conference {
 
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
-	}
- 
-
-	public String getAbout() {
-		return about;
-	}
-
-	public void setAbout(String about) {
-		this.about = about;
-	}
-
-
-	public Date getDateStar() {
-		return dateStar;
-	}
-
-	public void setDateStar(Date dateStar) {
-		this.dateStar = dateStar;
-	}
-
-	public Date getDateEnd() {
-		return dateEnd;
-	}
-
-	public void setDateEnd(Date dateEnd) {
-		this.dateEnd = dateEnd;
-	}
-
-	public SortedSet<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(SortedSet<Article> articles) {
-		this.articles = articles;
-	}
-
-	public SortedSet<Planning> getPlannings() {
-		return plannings;
-	}
-
-	public void setPlannings(SortedSet<Planning> plannings) {
-		this.plannings = plannings;
-	}
-
-	public SortedSet<ChairRole> getChairsRoles() {
-		return chairsRoles;
-	}
-
-	public void setChairsRoles(SortedSet<ChairRole> chairsRoles) {
-		this.chairsRoles = chairsRoles;
-	}
-
-	public Chair getCreator() {
-		return creator;
-	}
-
-	public void setCreator(Chair creator) {
-		this.creator = creator;
-	}
-
-	public SortedSet<Sponsor> getSponsors() {
-		return sponsors;
-	}
-
-	public void setSponsors(SortedSet<Sponsor> sponsors) {
-		this.sponsors = sponsors;
 	}
 
 	public String getContry() {
@@ -202,27 +132,84 @@ public class Conference {
 		this.adress = adress;
 	}
 
+	public String getAbout() {
+		return about;
+	}
 
-
-
-
-
+	public void setAbout(String about) {
+		this.about = about;
+	}
 
 	public String getDisciplines() {
 		return disciplines;
 	}
 
-
-
-
-
-
-
 	public void setDisciplines(String disciplines) {
 		this.disciplines = disciplines;
 	}
 
+	public Date getDateStar() {
+		return dateStar;
+	}
 
+	public void setDateStar(Date dateStar) {
+		this.dateStar = dateStar;
+	}
 
+	public Date getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
+	public Set<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(Set<Article> articles) {
+		this.articles = articles;
+	}
+
+	public Set<Planning> getPlannings() {
+		return plannings;
+	}
+
+	public void setPlannings(Set<Planning> plannings) {
+		this.plannings = plannings;
+	}
+
+	public Set<ChairRole> getChairsRoles() {
+		return chairsRoles;
+	}
+
+	public void setChairsRoles(Set<ChairRole> chairsRoles) {
+		this.chairsRoles = chairsRoles;
+	}
+
+	public Chair getCreator() {
+		return creator;
+	}
+
+	public void setCreator(Chair creator) {
+		this.creator = creator;
+	}
+
+	public Set<Sponsor> getSponsors() {
+		return sponsors;
+	}
+
+	public void setSponsors(Set<Sponsor> sponsors) {
+		this.sponsors = sponsors;
+	}
+
+	@Override
+	public int compareTo(Conference o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
+	
+
 }

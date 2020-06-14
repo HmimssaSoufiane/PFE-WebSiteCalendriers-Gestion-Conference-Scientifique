@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.este.conf.models.Chair;
+import com.este.conf.models.Conference;
 import com.este.conf.repositories.ChairRepository;
+import com.este.conf.repositories.ConferenceRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,7 +25,10 @@ public class ChairController {
 	
 	@Autowired
 	ChairRepository chairRepository;
-
+	@Autowired
+	ConferenceRepository conferenceRepository;
+	
+	
 	@GetMapping("/chairs")
 	public List<Chair> getchairs() {
 		return chairRepository.findAll();
@@ -43,12 +49,30 @@ public class ChairController {
 		return "Errur";
 	}
 
-
-
 	@DeleteMapping("/chairs/{id}")
 	public String deletechair(@PathVariable int id) {
 		chairRepository.deleteById(id);
 		return "Done";
 	}
+	//----
+	@PutMapping("/chairs/{id}/conference")
+	public Chair updateConference(@PathVariable int id, @RequestBody Conference conference) {
+		Chair chair = chairRepository.findById(id).orElse(null);
+		if (chair != null) {
+			
+			conference.setCreator(chair);
+			//chair.getCreatedConferences().add(conference);			
+			
+			conferenceRepository.save(conference);
+			//chairRepository.save(chair);
+			
+			
+			
+			return chair ;
+		}
+
+		return null;
+	}
+
 
 }

@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.este.conf.models.Article;
 import com.este.conf.models.Conference;
 import com.este.conf.repositories.ConferenceRepository;
 
@@ -20,10 +22,10 @@ import com.este.conf.repositories.ConferenceRepository;
 @RestController
 @RequestMapping("/api/conference")
 public class ConferenceController {
-	
+
 	@Autowired
 	ConferenceRepository conferenceRepository;
-	//DaoCategorie daoCategorie;
+	// DaoCategorie daoCategorie;
 
 	@GetMapping("/conferences")
 	public List<Conference> getConferences() {
@@ -35,7 +37,7 @@ public class ConferenceController {
 		return conferenceRepository.findById(id).orElse(null);
 	}
 
-	@PostMapping("/conferences") 
+	@PostMapping("/conferences")
 	public @ResponseBody String addConferencer(@RequestBody Conference conference) {
 
 		if (conference != null) {
@@ -49,5 +51,17 @@ public class ConferenceController {
 	public String deleteConference(@PathVariable int id) {
 		conferenceRepository.deleteById(id);
 		return "Done";
+	}
+
+	@PutMapping("/conferences/{id}/article")
+	public String updateConference(@PathVariable int id, @RequestBody Article article) {
+		Conference conference = conferenceRepository.findById(id).orElse(null);
+		if (conference != null) {
+			conference.getArticles().add(article);
+			conferenceRepository.save(conference);
+			return "Done";
+		}
+
+		return "not found";
 	}
 }

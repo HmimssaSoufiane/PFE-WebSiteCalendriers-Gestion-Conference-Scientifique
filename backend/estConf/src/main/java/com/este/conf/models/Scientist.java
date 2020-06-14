@@ -1,6 +1,5 @@
 package com.este.conf.models;
 
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -31,19 +30,20 @@ public class Scientist extends Person {
 				password);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Set<Note> getNotes() {
-		return notes;
-	}
-	public void setNotes(SortedSet<Note> notes) {
-		this.notes = notes;
-	}
 	public int getNombreOfAtricleChecked() {
 		return nombreOfAtricleChecked;
 	}
 	public void setNombreOfAtricleChecked(int nombreOfAtricleChecked) {
 		this.nombreOfAtricleChecked = nombreOfAtricleChecked;
 	}
+	public SortedSet<Note> getNotes() {
+		return notes;
+	}
+	public void setNotes(SortedSet<Note> notes) {
+		this.notes = notes;
+	}
+	
+	
 	
 	
 }
