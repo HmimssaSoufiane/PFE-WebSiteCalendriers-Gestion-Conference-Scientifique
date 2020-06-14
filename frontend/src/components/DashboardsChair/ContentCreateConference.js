@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button'
 import Toolbar from '@material-ui/core/Toolbar';
+import Alert from 'react-bootstrap/Alert'
 
 
 
@@ -34,6 +35,7 @@ const styles = (theme) => ({
     },
 });
 
+
 function Content(props) {
     const { classes } = props;
     const [name, setName] = useState("");
@@ -45,6 +47,9 @@ function Content(props) {
     const [discipline, setDiscipline] = useState("");
     const [dateStart, setDateStar] = useState("");
     const [dateEnd, setDateEnd] = useState("");
+
+    const [show, setShow] = useState(false);
+
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -180,9 +185,20 @@ function Content(props) {
 
 
 
-                    <Button variant="primary" type="submit">
-                        Create
-                    </Button>
+                    {!show && <Button variant="primary" type="submit" onClick={() => setShow(true)}>Create</Button>}
+
+
+                    <>
+                        <Alert show={show} variant="success">
+                            <Alert.Heading> Your conferences  has been created successfully !</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-end">
+                                <Button type="reset" onClick={() => setShow(false)} variant="outline-success">
+                                    Close
+                                </Button>
+                            </div>
+                        </Alert>
+                    </>
                 </Form>
 
             </div>
