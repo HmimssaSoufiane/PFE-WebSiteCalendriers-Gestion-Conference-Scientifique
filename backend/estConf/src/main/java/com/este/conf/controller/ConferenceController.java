@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.este.conf.models.Article;
 import com.este.conf.models.Conference;
+import com.este.conf.models.Planning;
 import com.este.conf.repositories.ConferenceRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -63,5 +64,22 @@ public class ConferenceController {
 		}
 
 		return "not found";
+	}
+	
+	@PutMapping("/conferences/{id}/planning")
+	public Conference updateConference(@PathVariable int id, @RequestBody Planning planning ) {
+		Conference conference = conferenceRepository.findById(id).orElse(null);
+		if (conference != null) {
+			
+			/* Working */
+			planning.setConference(conference);
+			conference.getPlannings().add(planning);			
+			conferenceRepository.save(conference);
+			
+			
+			return conference ;
+		}
+
+		return null;
 	}
 }

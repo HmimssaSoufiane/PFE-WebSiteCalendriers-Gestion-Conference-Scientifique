@@ -83,6 +83,7 @@ function Content(props) {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+        setShow(true);
     }
 
 
@@ -182,27 +183,22 @@ function Content(props) {
                             setAbout(e.target.value);
                         }} />
                     </Form.Group>
+                    <Button variant="primary" type="submit"  >Create</Button>
 
 
-
-                    {!show && <Button variant="primary" type="submit" onClick={() => setShow(true)}>Create</Button>}
-
-
-                    <>
-                        <Alert show={show} variant="success">
-                            <Alert.Heading> Your conferences  has been created successfully !</Alert.Heading>
-                            <hr />
-                            <div className="d-flex justify-content-end">
-                                <Button type="reset" onClick={() => setShow(false)} variant="outline-success">
-                                    Close
+                    <Alert show={show} variant="success">
+                        <Alert.Heading> Your conferences  has been created successfully !</Alert.Heading>
+                        <hr />
+                        <div className="d-flex justify-content-end">
+                            <Button type="reset" onClick={() => setShow(false)} variant="outline-success">
+                                Close
                                 </Button>
-                            </div>
-                        </Alert>
-                    </>
+                        </div>
+                    </Alert>
                 </Form>
 
             </div>
-        </Paper>
+        </Paper >
     );
 }
 

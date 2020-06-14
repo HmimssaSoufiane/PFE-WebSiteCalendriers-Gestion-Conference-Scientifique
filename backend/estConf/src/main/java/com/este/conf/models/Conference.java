@@ -46,6 +46,7 @@ public class Conference implements Comparable<Conference> {
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
+	@JsonIgnoreProperties("conference")
 	private Set<Planning> plannings ;
 
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
@@ -55,7 +56,7 @@ public class Conference implements Comparable<Conference> {
 
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
-	@JoinColumn(name = "idCreator")
+	@JoinColumn(name = "idPerson")
 	@JsonIgnoreProperties("createdConferences")
 	private Chair creator;
 
@@ -82,6 +83,18 @@ public class Conference implements Comparable<Conference> {
 		this.discipline = discipline;
 		this.dateStar = dateStar;
 		this.dateEnd = dateEnd;
+	}
+	public Conference(int idConference, String name, String shortName, String contry, String city, String adress,
+			String about, String discipline) {
+		super();
+		this.idConference = idConference;
+		this.name = name;
+		this.shortName = shortName;
+		this.contry = contry;
+		this.city = city;
+		this.adress = adress;
+		this.about = about;
+		this.discipline = discipline;
 	}
 
 	public int getIdConference() {
@@ -206,9 +219,12 @@ public class Conference implements Comparable<Conference> {
 
 	@Override
 	public int compareTo(Conference o) {
-		// TODO Auto-generated method stub
+		if (idConference != o.idConference)
+			return 1;
 		return 0;
 	}
+
+	
 	
 	
 

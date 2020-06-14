@@ -43,26 +43,60 @@ function Content(props) {
     const { classes } = props;
     const [conferences, setConferences] = useState([]);
 
-    const calendarContect = {
-        calendarWeekends: true,
-        calendarEvents: {
-            calendarWeekends: true,
-            calendarEvents: [{ title: 'event 1', date: '2020-06-09' },
-            { title: 'event 2', date: '2020-06-11' },
-            { title: 'event 3', start: new Date() }
-            ]
-        }
-    }
-
     useEffect(() => {
         // Update the document title using the browser API
-        console.log(new Date());
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
 
-    });
+        fetch("http://localhost:8080/api/chair/chairs/1", requestOptions)
+            .then(response => response.text())
+            .then(result => setConferences((JSON.parse(result)).createdConferences))
+            .catch(error => console.log('error', error))
+
+    }, []);
 
     return (
         <div >
-            <Paper style={{ verticalAlign: "top", display: 'inline-block', width: "70%" }} className={classes.paper}>
+            <Paper style={{ marginBottom: "10px" }} className={classes.paper}>
+                <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
+                    <Toolbar>
+                        <h2 style={{ padding: "10px 0  5px 0", color: "white" }}>Conference</h2>
+                    </Toolbar>
+                </AppBar>
+                <Form style={{ textAlign: "left", padding: "20px" }}>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridState" >
+                            <Form.Label >Select Conference </Form.Label>
+                            <Form.Control as="select" value="Choose...">
+                                {conferences.map(row => (<option value={row.name}>{row.name}</option>))}
+                            </Form.Control>
+                        </Form.Group>
+                    </Form.Row >
+
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridAddress1">
+                            <Form.Label>Event Name</Form.Label>
+                            <Form.Control placeholder="Event name" />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="date" bsSize="large">
+                            <Form.Label>Event Date </Form.Label>
+                            <Form.Control
+                                type="date"
+                                style={{ width: '100%' }}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Button variant="primary" type="submit">
+                        Create event
+                    </Button>
+                </Form>
+            </Paper>
+            <Paper className={classes.paper}>
                 <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
                     <Toolbar>
                         <h2 style={{ padding: "10px 0  5px 0", color: "white" }}> Conference its events </h2>
@@ -85,58 +119,9 @@ function Content(props) {
                             { title: 'event 2', date: '2020-06-01' }
                         ]}
                     />
-
-
                 </div>
             </Paper>
-            <Paper style={{ verticalAlign: "top", display: 'inline-block', width: "25%", marginLeft: "50px" }} className={classes.paper}>
-                <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
-                    <Toolbar>
-                        <h2 style={{ padding: "10px 0  5px 0", color: "white" }}>Conference</h2>
-                    </Toolbar>
-                </AppBar>
-                <Form style={{ textAlign: "left", padding: "5%" }}>
-                    <Form.Row>
 
-                        <Form.Group as={Col} controlId="formGridState" >
-                            <Form.Label >Select Conference </Form.Label>
-                            <Form.Control as="select" value="Choose...">
-                                <option>Choose...</option>
-                                <option>...</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </Form.Row >
-
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridAddress1">
-                            <Form.Label>Event name</Form.Label>
-                            <Form.Control placeholder="Event name" />
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-
-
-                        <Form.Group as={Col} controlId="date" bsSize="large">
-                            <Form.Label>Date begin </Form.Label>
-                            <Form.Control
-                                type="date"
-                                style={{ width: '100%' }}
-                            />
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="date" bsSize="large">
-                            <Form.Label>Date end</Form.Label>
-                            <Form.Control
-                                type="date"
-                                style={{ width: '100%' }}
-                            />
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Button variant="primary" type="submit">
-                        Create
-                    </Button>
-                </Form>
-            </Paper>
         </div>
     );
 }

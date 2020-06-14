@@ -11,8 +11,10 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
-public class Planning {
+public class Planning  implements Comparable<Planning>{
 
 
 	@Id
@@ -26,6 +28,7 @@ public class Planning {
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
 	@JoinColumn(name="idConference")
+	@JsonIgnoreProperties("plannings")
 	private Conference conference;
 	
 	
@@ -99,6 +102,13 @@ public class Planning {
 
 	public void setConference(Conference conference) {
 		this.conference = conference;
+	}
+
+
+	@Override
+	public int compareTo(Planning o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 
