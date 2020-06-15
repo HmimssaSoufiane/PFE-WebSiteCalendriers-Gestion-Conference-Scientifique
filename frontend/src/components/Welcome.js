@@ -1,5 +1,4 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,11 +18,8 @@ import Paper from '@material-ui/core/Paper';
 import Image from 'react-bootstrap/Image';
 import { Col } from 'react-bootstrap';
 import NavBar from './NavBar';
-
-
-
-
-
+import { Link } from "react-router-dom";
+import Moment from 'react-moment';
 
 function Copyright() {
     return (
@@ -70,16 +66,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const conferences = [
-    { name: "Computers and Computation Conference", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-    { name: "Advances in Animal Anatomy and Wild Animals Conference", shortName: "ICAAAWA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-    { name: "Advances in Aquafarming Conference", shortName: "ICAA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-    { name: "Autograft, Allograft, Isograft and Xenograft in Surgery Conference", shortName: "ICAAIXS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-    { name: " Autonomous Agents and Multi-Agent Systems Conference", shortName: "ICAAMAS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" }
-];
-
 export default function Album() {
     const classes = useStyles();
+    const [conferences, setConferences] = useState([]);
+    const [filterByName, setFilterByName] = useState([]);
+
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/api/conference/conferences", requestOptions)
+            .then(response => response.text())
+            .then(result => setConferences(JSON.parse(result)))
+            .catch(error => console.log('error', error));
+
+    }, []);
 
     return (
         <React.Fragment>
@@ -111,6 +116,9 @@ export default function Album() {
                                             disableUnderline: true,
                                             className: classes.searchInput,
                                         }}
+                                        onChange={e => {
+                                            setFilterByName(e.target.value);
+                                        }}
                                     />
                                 </Grid>
                             </Grid>
@@ -123,7 +131,7 @@ export default function Album() {
                         <Table className={classes.table} aria-label="simple table" style={{ padding: "20px", borderCollapse: "separate", borderSpacing: "0 15px" }}>
 
                             <TableBody>
-                                {conferences.map(row => (
+                                {conferences.filter(row => row.name.toLowerCase().search(filterByName) !== -1).map(row => (
                                     <TableRow style={{ textAlign: "left", background: "#f3f4f6" }} key={row.idConference}>
                                         <TableCell style={{ borderRadius: "10px 0 0 10px", fontWeight: "bold" }}>
                                             <Col xs={6} md={4}>
@@ -132,17 +140,21 @@ export default function Album() {
                                         </TableCell>
                                         <TableCell style={{ fontWeight: "bold" }}>{row.name}</TableCell>
                                         <TableCell style={{ fontWeight: "bold" }}>{row.shortName}</TableCell>
-                                        <TableCell style={{ fontWeight: "bold" }}>{row.location}</TableCell>
-                                        <TableCell style={{ fontWeight: "bold" }} align="right">{row.dateStar}</TableCell>
-                                        <TableCell style={{ fontWeight: "bold" }} align="right">{row.dateEnd}</TableCell>
-                                        <TableCell style={{ borderRadius: "0 10px 10px 0" }} >
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={classes.button}
-                                            >
-                                                View
-                                        </Button>
+                                        <TableCell style={{ fontWeight: "bold" }}>{row.contry}</TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }} align="right">
+                                            <Moment format="YYYY/MM/DD">
+                                                {row.dateStar}
+                                            </Moment>
+                                        </TableCell>
+                                        <TableCell style={{ fontWeight: "bold" }} align="right">
+                                            <Moment format="YYYY/MM/DD">
+                                                {row.dateEnd}
+                                            </Moment>
+                                        </TableCell>
+                                        <TableCell style={{ background: "red", borderRadius: "0 10px 10px 0" }} >
+                                            <Link
+                                                to={`/ConferanceDetails/${row.idConference}`}
+                                            > View </Link>
                                         </TableCell>
                                     </TableRow>
                                 ))}

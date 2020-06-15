@@ -11,10 +11,10 @@ public class Listener extends Person implements Comparable<Listener> {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Listener(int idPerson, String title, String firstName, String middleName, String lastName, String aounntType,
-			Byte[] photo, String organizationName, String country, String region, String phone, String email,
-			String password) {
-		super(idPerson, title, firstName, middleName, lastName, aounntType, photo, organizationName, country, region, phone,
+	public Listener(int idPerson, String title, String firstName, String middleName, String lastName,
+			String accountType, Byte[] photo, String organizationName, String country, String region, String phone,
+			String email, String password) {
+		super(idPerson, title, firstName, middleName, lastName, accountType, photo, organizationName, country, region, phone,
 				email, password);
 		// TODO Auto-generated constructor stub
 	}

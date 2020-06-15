@@ -24,11 +24,11 @@ public class Scientist extends Person implements Comparable<Scientist>{
 	public Scientist() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Scientist(int idPerson, String title, String firstName, String middleName, String lastName,
-			String aounntType, Byte[] photo, String organizationName, String country, String region, String phone,
+			String accountType, Byte[] photo, String organizationName, String country, String region, String phone,
 			String email, String password) {
-		super(idPerson, title, firstName, middleName, lastName, aounntType, photo, organizationName, country, region, phone,
+		super(idPerson, title, firstName, middleName, lastName, accountType, photo, organizationName, country, region, phone,
 				email, password);
 		// TODO Auto-generated constructor stub
 	}

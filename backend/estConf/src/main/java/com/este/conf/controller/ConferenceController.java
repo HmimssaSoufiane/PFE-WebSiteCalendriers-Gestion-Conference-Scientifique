@@ -76,7 +76,6 @@ public class ConferenceController {
 			conference.getPlannings().add(planning);			
 			conferenceRepository.save(conference);
 			
-			
 			return conference ;
 		}
 

@@ -18,7 +18,7 @@ public class Person {
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private String aounntType;
+	private String accountType;
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private Byte[] Photo;
@@ -35,7 +35,8 @@ public class Person {
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
-	public Person(int idPerson, String title, String firstName, String middleName, String lastName, String aounntType,
+	
+	public Person(int idPerson, String title, String firstName, String middleName, String lastName, String accountType,
 			Byte[] photo, String organizationName, String country, String region, String phone, String email,
 			String password) {
 		super();
@@ -44,7 +45,7 @@ public class Person {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.aounntType = aounntType;
+		this.accountType = accountType;
 		Photo = photo;
 		this.organizationName = organizationName;
 		this.country = country;
@@ -53,87 +54,111 @@ public class Person {
 		this.email = email;
 		this.password = password;
 	}
-	public String getAounntType() {
-		return aounntType;
-	}
-	public void setAounntType(String aounntType) {
-		this.aounntType = aounntType;
-	}
 
-	
 	public int getIdPerson() {
 		return idPerson;
 	}
-	
+
 	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getMiddleName() {
 		return middleName;
 	}
+
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
 	public Byte[] getPhoto() {
 		return Photo;
 	}
+
 	public void setPhoto(Byte[] photo) {
 		Photo = photo;
 	}
+
 	public String getOrganizationName() {
 		return organizationName;
 	}
+
 	public void setOrganizationName(String organizationName) {
 		this.organizationName = organizationName;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 	public String getRegion() {
 		return region;
 	}
+
 	public void setRegion(String region) {
 		this.region = region;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
