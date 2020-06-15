@@ -11,7 +11,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
 
 @Entity
-public class Scientist extends Person {
+public class Scientist extends Person implements Comparable<Scientist>{
 
 
 	private int nombreOfAtricleChecked;
@@ -24,12 +24,15 @@ public class Scientist extends Person {
 	public Scientist() {
 		// TODO Auto-generated constructor stub
 	}
-	public Scientist(int idPerson, String title, String firstName, String middleName, String lastName, Byte[] photo,
-			String organizationName, String country, String region, String phone, String email, String password) {
-		super(idPerson, title, firstName, middleName, lastName, photo, organizationName, country, region, phone, email,
-				password);
+	
+	public Scientist(int idPerson, String title, String firstName, String middleName, String lastName,
+			String aounntType, Byte[] photo, String organizationName, String country, String region, String phone,
+			String email, String password) {
+		super(idPerson, title, firstName, middleName, lastName, aounntType, photo, organizationName, country, region, phone,
+				email, password);
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getNombreOfAtricleChecked() {
 		return nombreOfAtricleChecked;
 	}
@@ -43,7 +46,12 @@ public class Scientist extends Person {
 		this.notes = notes;
 	}
 	
-	
+	@Override
+	public int compareTo(Scientist o) {
+		if (this.getIdPerson() != o.getIdPerson())
+			return 1;
+		return 0;
+	}
 	
 	
 }

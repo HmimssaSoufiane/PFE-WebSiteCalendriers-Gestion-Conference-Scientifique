@@ -25,12 +25,17 @@ public class Author extends Person implements Comparable<Author>{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Author(int idPerson, String title, String firstName, String middleName, String lastName, Byte[] photo,
-			String organizationName, String country, String region, String phone, String email, String password) {
-		super(idPerson, title, firstName, middleName, lastName, photo, organizationName, country, region, phone, email,
-				password);
+	
+
+	public Author(int idPerson, String title, String firstName, String middleName, String lastName, String aounntType,
+			Byte[] photo, String organizationName, String country, String region, String phone, String email,
+			String password) {
+		super(idPerson, title, firstName, middleName, lastName, aounntType, photo, organizationName, country, region, phone,
+				email, password);
 		// TODO Auto-generated constructor stub
 	}
+
+
 
 	public Set<Article> getArticles() {
 		return articles;

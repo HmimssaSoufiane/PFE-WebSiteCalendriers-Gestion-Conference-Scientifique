@@ -107,7 +107,8 @@ public class Planning  implements Comparable<Planning>{
 
 	@Override
 	public int compareTo(Planning o) {
-		// TODO Auto-generated method stub
+		if (this.idPlanning != o.getIdPlanning())
+			return 1;
 		return 0;
 	}
 	
