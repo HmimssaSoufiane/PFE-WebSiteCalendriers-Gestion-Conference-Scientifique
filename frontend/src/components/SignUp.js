@@ -138,7 +138,9 @@ export default function SignUp() {
                                 <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={compteType} onChange={handleChange} label="Account type" >
                                     <MenuItem value={10}>Chair</MenuItem>
                                     <MenuItem value={20}>Scientist</MenuItem>
-                                    <MenuItem value={30}>Listener</MenuItem>
+                                    <MenuItem value={30}>Author</MenuItem>
+                                    <MenuItem value={40}>Listener</MenuItem>
+
                                 </Select>
                             </FormControl>
                         </Grid>

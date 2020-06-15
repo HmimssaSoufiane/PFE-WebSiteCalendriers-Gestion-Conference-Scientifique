@@ -13,6 +13,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select'
+
 
 
 function Copyright() {
@@ -55,7 +60,12 @@ export default function SignIn() {
     const [client, setClient] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
+    const [compteType, setCompteType] = useState(10);
+
+    const handleChange = (event) => {
+        setCompteType(event.target.value);
+    };
 
 
     const handleSubmit = (evt) => {
@@ -75,11 +85,17 @@ export default function SignIn() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/login/chairsLogin", requestOptions)
+        var myAPI;
+        if (compteType === 10) myAPI = "http://localhost:8080/api/login/chairsLogin";
+        else if (compteType === 30) myAPI = "http://localhost:8080/api/login/authorsLogin";
+
+        console.log(myAPI);
+        console.log(compteType);
+
+        fetch(myAPI, requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(JSON.parse(result));
-
                 if (result !== "") {
                     setClient(result);
                     console.log("not emty");
@@ -87,17 +103,11 @@ export default function SignIn() {
                 else setShow(true);
             })
             .catch(error => console.log('error', error));
-
-        console.log("hello");
-
-
     }
 
     return (
 
         <Container component="main" maxWidth="xs">
-
-
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -105,11 +115,21 @@ export default function SignIn() {
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
-        </Typography>
+                </Typography>
                 <form className={classes.form} onSubmit={handleSubmit} noValidate>
-                    <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    <Alert variant="danger" show={show} onClose={() => setShow(false)} dismissible>
+                        <Alert.Heading>You got an error!</Alert.Heading>
                     </Alert>
+                    <FormControl variant="outlined" required fullWidth>
+                        <InputLabel id="demo-simple-select-outlined-label">Account type</InputLabel>
+
+                        <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={compteType} onChange={handleChange} label="Account type" >
+                            <MenuItem value={10}>Chair</MenuItem>
+                            <MenuItem value={20}>Scientist</MenuItem>
+                            <MenuItem value={30}>Author</MenuItem>
+                            <MenuItem value={40}>Listener</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus
                         onChange={e => {
                             setEmail(e.target.value);
