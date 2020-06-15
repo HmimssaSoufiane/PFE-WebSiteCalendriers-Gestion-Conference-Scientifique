@@ -3,7 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -54,6 +55,8 @@ export default function SignIn() {
     const [client, setClient] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [show, setShow] = useState(true);
+
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -76,9 +79,12 @@ export default function SignIn() {
             .then(response => response.text())
             .then(result => {
                 console.log(JSON.parse(result));
-                setClient(result);
-                if (result !== "") console.log("not emty");
-                else console.log("emty");
+
+                if (result !== "") {
+                    setClient(result);
+                    console.log("not emty");
+                }
+                else setShow(true);
             })
             .catch(error => console.log('error', error));
 
@@ -101,6 +107,9 @@ export default function SignIn() {
                     Sign in
         </Typography>
                 <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                    <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    </Alert>
                     <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus
                         onChange={e => {
                             setEmail(e.target.value);

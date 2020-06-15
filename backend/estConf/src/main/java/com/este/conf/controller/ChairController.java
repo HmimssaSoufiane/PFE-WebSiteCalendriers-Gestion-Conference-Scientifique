@@ -68,7 +68,7 @@ public class ChairController {
 //			chair2.AddCreatedConference(new Conference(1, "soufiane", "test", "test", "test", "test", "test", "test"));
 
 			conference.setCreator(chair);
-			chair.AddCreatedConference(conference);
+			chair.getCreatedConferences().add(conference);
 			// chairRepository.save(chair);
 			conferenceRepository.save(conference);
 

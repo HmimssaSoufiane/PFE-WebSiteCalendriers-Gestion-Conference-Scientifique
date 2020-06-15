@@ -18,6 +18,7 @@ public class Person {
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	private String aounntType;
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private Byte[] Photo;
@@ -34,14 +35,16 @@ public class Person {
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
-	public Person(int idPerson, String title, String firstName, String middleName, String lastName, Byte[] photo,
-			String organizationName, String country, String region, String phone, String email, String password) {
+	public Person(int idPerson, String title, String firstName, String middleName, String lastName, String aounntType,
+			Byte[] photo, String organizationName, String country, String region, String phone, String email,
+			String password) {
 		super();
 		this.idPerson = idPerson;
 		this.title = title;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+		this.aounntType = aounntType;
 		Photo = photo;
 		this.organizationName = organizationName;
 		this.country = country;
@@ -50,6 +53,13 @@ public class Person {
 		this.email = email;
 		this.password = password;
 	}
+	public String getAounntType() {
+		return aounntType;
+	}
+	public void setAounntType(String aounntType) {
+		this.aounntType = aounntType;
+	}
+
 	
 	public int getIdPerson() {
 		return idPerson;
