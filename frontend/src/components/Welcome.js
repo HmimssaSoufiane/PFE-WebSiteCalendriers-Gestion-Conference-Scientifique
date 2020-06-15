@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from '../asset/logo.png'; // with import
 import home_banner from '../asset/Home_banner.jpg'; // with import
@@ -19,6 +18,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Image from 'react-bootstrap/Image';
 import { Col } from 'react-bootstrap';
+import NavBar from './NavBar';
+
 
 
 
@@ -82,32 +83,8 @@ export default function Album() {
 
     return (
         <React.Fragment>
-            <Navbar >
-                <Navbar.Brand href="#home">
-                    <img
-                        src={logo}
-                        width="80"
-                        height="80"
-                        className="d-inline-block align-top"
-                        alt="React Bootstrap logo"
-                    />
-                </Navbar.Brand>
-                <Navbar.Brand href="#home">EsteConference</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="/home">Home</Nav.Link>
-                    <Nav.Link href="#features">Contact</Nav.Link>
-                    <Nav.Link href="#pricing">About us</Nav.Link>
-                </Nav>
-                <Nav className="justify-content-end" activeKey="/home">
-                    <Nav.Item>
-                        <Nav.Link href="/home">LogIn</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">SingUp</Nav.Link>
-                    </Nav.Item>
-                </Nav>
+            <NavBar />
 
-            </Navbar>
             <main>
                 {/* Hero unit */}
                 <div style={{

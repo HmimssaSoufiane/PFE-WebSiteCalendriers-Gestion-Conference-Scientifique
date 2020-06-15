@@ -17,6 +17,8 @@ import ContentCreateConference from './ContentCreateConference';
 import ContentPlanning from './ContentPlanning';
 import ContentMyConferences from './ContectMyConferences';
 import Header from './Header';
+import { Redirect } from 'react-router-dom';
+
 
 function Copyright() {
     return (
@@ -188,6 +190,7 @@ const styles = {
 function Paperbase(props) {
     const { classes } = props;
     const [whichContent, setWhichContent] = useState("link1");
+    const [client, setClient] = useState({});
 
     const handleChangeContent = (e) => {
 
@@ -198,9 +201,17 @@ function Paperbase(props) {
     }
 
 
+    // useEffect(() => {
+    //     (() => {
+    //         setClient(JSON.parse(localStorage.getItem('client')));
+    //         console.log('cliant', JSON.parse(localStorage.getItem('client')));
+    //         console.log('cliant state', client);
+    //     })();
+    // });
 
     return (
         <ThemeProvider theme={theme}>
+            {/*(Object.keys(client).length === 0) ? <Redirect to="/SignIn" /> : null*/}
             <div className={classes.root}>
                 <CssBaseline />
                 <nav className={classes.drawer} style={{ backgroundColor: "lightblue", textAlign: "left", padding: "5px" }}>

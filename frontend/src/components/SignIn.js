@@ -5,6 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import NavBar from './NavBar';
+
+
 
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -76,8 +79,6 @@ export default function SignIn() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        //var raw = JSON.stringify({ "email": "Harebo@gmail.com", "password": "Este@2020" });
-
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
@@ -95,10 +96,13 @@ export default function SignIn() {
         fetch(myAPI, requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(JSON.parse(result));
                 if (result !== "") {
-                    setClient(result);
-                    console.log("not emty");
+                    //console.log(JSON.parse(result));
+                    localStorage.setItem('client', result);
+                    setClient(JSON.parse(localStorage.getItem('client')));
+                    //console.log('cliant', JSON.parse(localStorage.getItem('client')));
+                    //console.log('cliant state', client);
+
                 }
                 else setShow(true);
             })
@@ -106,61 +110,64 @@ export default function SignIn() {
     }
 
     return (
+        <>
+            <NavBar />
+            <Container component="main" maxWidth="xs">
 
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
+                {(Object.keys(client).length !== 0) ? (compteType === 10) ? <Redirect to="/DashboardsChair" /> : (compteType === 30) ? <Redirect to="/DashboardsAuthor" /> : null : null}
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit} noValidate>
-                    <Alert variant="danger" show={show} onClose={() => setShow(false)} dismissible>
-                        <Alert.Heading>You got an error!</Alert.Heading>
-                    </Alert>
-                    <FormControl variant="outlined" required fullWidth>
-                        <InputLabel id="demo-simple-select-outlined-label">Account type</InputLabel>
+                    <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                        <Alert variant="danger" show={show} onClose={() => setShow(false)} dismissible>
+                            <p>Your password or the email not correct!</p>
+                        </Alert>
+                        <FormControl variant="outlined" required fullWidth>
+                            <InputLabel id="demo-simple-select-outlined-label">Account type</InputLabel>
 
-                        <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={compteType} onChange={handleChange} label="Account type" >
-                            <MenuItem value={10}>Chair</MenuItem>
-                            <MenuItem value={20}>Scientist</MenuItem>
-                            <MenuItem value={30}>Author</MenuItem>
-                            <MenuItem value={40}>Listener</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus
-                        onChange={e => {
-                            setEmail(e.target.value);
-                        }}
-                    />
-                    <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"
-                        onChange={e => {
-                            setPassword(e.target.value);
-                        }}
-                    />
-
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} >
-                        Sign In
+                            <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={compteType} onChange={handleChange} label="Account type" >
+                                <MenuItem value={10}>Chair</MenuItem>
+                                <MenuItem value={20}>Scientist</MenuItem>
+                                <MenuItem value={30}>Author</MenuItem>
+                                <MenuItem value={40}>Listener</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus
+                            onChange={e => {
+                                setEmail(e.target.value);
+                            }}
+                        />
+                        <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"
+                            onChange={e => {
+                                setPassword(e.target.value);
+                            }}
+                        />
+                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} >
+                            Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
                             </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
-        </Container>
+                    </form>
+                </div>
+                <Box mt={8}>
+                    <Copyright />
+                </Box>
+            </Container>
+        </>
     );
 }
