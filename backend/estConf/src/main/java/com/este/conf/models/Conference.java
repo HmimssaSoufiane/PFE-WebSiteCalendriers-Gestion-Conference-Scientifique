@@ -2,6 +2,7 @@ package com.este.conf.models;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,13 +42,14 @@ public class Conference implements Comparable<Conference> {
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private Set<Article> articles;
+	private Set<Article> articles = new TreeSet<Article>();
 
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	@JsonIgnoreProperties("conference")
-	private Set<Planning> plannings ;
+	private Set<Planning> plannings= new TreeSet<Planning>();
+
 
 	@OneToMany(mappedBy = "conference", orphanRemoval = true)
 	@Cascade(value = { CascadeType.ALL })

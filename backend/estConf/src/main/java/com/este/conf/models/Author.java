@@ -1,6 +1,6 @@
 package com.este.conf.models;
 
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.Entity;
@@ -11,14 +11,14 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
 
 @Entity
-public class Author extends Person {
+public class Author extends Person implements Comparable<Author>{
 
 
 
 	@OneToMany(mappedBy = "author")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
-	private SortedSet<Article> articles = new TreeSet<>();
+	private Set<Article> articles = new TreeSet<>();
 	
 
 	public Author() {
@@ -32,11 +32,19 @@ public class Author extends Person {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SortedSet<Article> getArticles() {
+	public Set<Article> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(SortedSet<Article> articles) {
+	public void setArticles(Set<Article> articles) {
 		this.articles = articles;
 	}
+
+	@Override
+	public int compareTo(Author o) {
+		if (this.getIdPerson() != o.getIdPerson())
+			return 1;
+		return 0;
+	}
+
 }

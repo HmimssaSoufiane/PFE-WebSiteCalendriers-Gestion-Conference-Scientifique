@@ -1,6 +1,5 @@
 package com.este.conf.models;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -53,7 +52,7 @@ public class Chair implements Comparable<Chair> {
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
 	@MapKey(name = "conference")
-	private Set<ChairRole> chairRoles;
+	private Set<ChairRole> chairRoles = new TreeSet<ChairRole>();
 
 	public Chair() {
 		// TODO Auto-generated constructor stub

@@ -25,7 +25,7 @@ import org.hibernate.annotations.SortNatural;
  
 
 @Entity
-public class Article {
+public class Article implements Comparable<Article>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idArticle;
@@ -142,6 +142,14 @@ public class Article {
 	public void setNotesByScientist(SortedSet<Note> notesByScientist) {
 		this.notesByScientist = notesByScientist;
 	}
-	
+
+
+	@Override
+	public int compareTo(Article o) {
+		if (idArticle != o.getIdArticle())
+			return 1;
+		return 0;
+	}
+
 	
 }
