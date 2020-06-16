@@ -114,7 +114,7 @@ export default function SignIn() {
             <NavBar />
             <Container component="main" maxWidth="xs">
 
-                {(Object.keys(client).length !== 0) ? (compteType === 10) ? <Redirect to="/DashboardsChair" /> : (compteType === 30) ? <Redirect to="/DashboardsAuthor" /> : null : null}
+                {(Object.keys(client).length !== 0) ? (compteType === 10) ? <Redirect to={`/DashboardsChair/${client.idPerson}`} /> : (compteType === 30) ? <Redirect to="/DashboardsAuthor" /> : null : null}
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

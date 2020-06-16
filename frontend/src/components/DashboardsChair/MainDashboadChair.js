@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +17,7 @@ import ContentCreateConference from './ContentCreateConference';
 import ContentPlanning from './ContentPlanning';
 import ContentMyConferences from './ContectMyConferences';
 import Header from './Header';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 
 
 function Copyright() {
@@ -190,7 +190,7 @@ const styles = {
 function Paperbase(props) {
     const { classes } = props;
     const [whichContent, setWhichContent] = useState("link1");
-    const [client, setClient] = useState({});
+
 
     const handleChangeContent = (e) => {
 
@@ -201,13 +201,9 @@ function Paperbase(props) {
     }
 
 
-    // useEffect(() => {
-    //     (() => {
-    //         setClient(JSON.parse(localStorage.getItem('client')));
-    //         console.log('cliant', JSON.parse(localStorage.getItem('client')));
-    //         console.log('cliant state', client);
-    //     })();
-    // });
+
+
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -223,16 +219,16 @@ function Paperbase(props) {
                         </ListItemText>
                     </ListItem>
                     <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
-                        <ListGroup.Item action href="#link1" name="link1" onClick={handleChangeContent} >
+                        <ListGroup.Item action name="link1" onClick={handleChangeContent} >
                             <PeopleIcon /> My Conferences
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" name="link2" onClick={handleChangeContent}  >
+                        <ListGroup.Item action name="link2" onClick={handleChangeContent}  >
                             <AddCircleOutlineIcon /> Create Conference
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" name="link3" onClick={handleChangeContent} >
+                        <ListGroup.Item action name="link3" onClick={handleChangeContent} >
                             <CalendarTodayIcon /> Planning
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link4" name="link4" onClick={handleChangeContent} >
+                        <ListGroup.Item action name="link4" onClick={handleChangeContent} >
                             <PieChartIcon /> Analytics
                         </ListGroup.Item>
                     </ListGroup>

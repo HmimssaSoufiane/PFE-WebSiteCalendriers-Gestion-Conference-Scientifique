@@ -18,6 +18,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
+import { useParams } from 'react-router-dom';
+import Moment from 'react-moment';
+
+
 
 const styles = (theme) => ({
     paper: {
@@ -44,17 +48,24 @@ const styles = (theme) => ({
 
 function Content(props) {
     const { classes } = props;
-    const [conferences, setConferences] = useState([
-        { name: "Computers and Computation Conference", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Advances in Animal Anatomy and Wild Animals Conference", shortName: "ICAAAWA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Advances in Aquafarming Conference", shortName: "ICAA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Autograft, Allograft, Isograft and Xenograft in Surgery Conference", shortName: "ICAAIXS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: " Autonomous Agents and Multi-Agent Systems Conference", shortName: "ICAAMAS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" }]);
+    const [client, setClient] = useState({});
+    const { name } = useParams();
+    const [filterByName, setFilterByName] = useState([]);
 
     useEffect(() => {
-        // Update the document title using the browser API
 
-    });
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch('http://localhost:8080/api/chair/chairs/' + name, requestOptions)
+            .then(response => response.text())
+            .then(result => setClient(JSON.parse(result)))
+            .catch(error => console.log('error', error));
+
+
+    }, [name]);
 
     return (
         <Paper className={classes.paper}>
@@ -71,6 +82,9 @@ function Content(props) {
                                 InputProps={{
                                     disableUnderline: true,
                                     className: classes.searchInput,
+                                }}
+                                onChange={e => {
+                                    setFilterByName(e.target.value);
                                 }}
                             />
                         </Grid>
@@ -94,20 +108,26 @@ function Content(props) {
                             <TableRow style={{ textAlign: "left", background: "#009be5" }}>
                                 <TableCell>Name</TableCell>
                                 <TableCell >Short Name</TableCell>
-                                <TableCell>Location</TableCell>
                                 <TableCell align="right">Date star</TableCell>
                                 <TableCell align="right">Date end </TableCell>
                                 <TableCell >Edit </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {conferences.map(row => (
+                            {client.createdConferences?.filter(row => row.name.toLowerCase().search(filterByName) !== -1).map(row => (
                                 <TableRow style={{ textAlign: "left", background: "lightblue" }} key={row.idConference}>
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell >{row.shortName}</TableCell>
-                                    <TableCell >{row.location}</TableCell>
-                                    <TableCell align="right">{row.dateStar}</TableCell>
-                                    <TableCell align="right">{row.dateEnd}</TableCell>
+                                    <TableCell align="right">
+                                        <Moment format="YYYY/MM/DD">
+                                            {row.dateStar}
+                                        </Moment>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Moment format="YYYY/MM/DD">
+                                            {row.dateEnd}
+                                        </Moment>
+                                    </TableCell>
                                     <TableCell >
                                         <Button
                                             variant="contained"
