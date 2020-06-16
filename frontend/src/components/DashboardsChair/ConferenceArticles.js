@@ -50,11 +50,11 @@ function Content(props) {
     const handleChange = (event) => {
         conferenceSelected.current = parseInt(event.target.value);
         setConference(conferences.filter(x => x.idConference === conferenceSelected.current));
-        console.log(conferenceSelected.current);
         console.log(conference);
+
     };
 
-    const [client, setClient] = useState({});
+    //const [client, setClient] = useState({});
 
     useEffect(() => {
 
@@ -67,6 +67,7 @@ function Content(props) {
             .then(response => response.text())
             .then(result => setConferences((JSON.parse(result)).createdConferences))
             .catch(error => console.log('error', error))
+
 
 
     }, [name]);
@@ -107,12 +108,12 @@ function Content(props) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {conference.articles?.map(row => (
+                                {conference[0]?.articles?.map(row => (
                                     <TableRow style={{ textAlign: "left", background: "white" }} key={row.idArticle}>
                                         <TableCell>{row.title}</TableCell>
                                         <TableCell >{row.noteAverage}</TableCell>
                                         <TableCell >{row.status}</TableCell>
-                                        <TableCell >{row.status}</TableCell>
+                                        <TableCell >{row.author.firstName}</TableCell>
                                         <TableCell >
                                             <InputGroup className="mb-2">
                                                 <InputGroup.Prepend>
