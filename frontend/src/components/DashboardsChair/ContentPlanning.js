@@ -77,7 +77,7 @@ function Content(props) {
 
         fetch("http://localhost:8080/api/conference/conferences/" + conferenceSelected.current + "/planning", requestOptions)
             .then(response => response.text())
-            .then(result => setConference([result]))
+            .then(result => setConference([JSON.parse(result)]))
             .catch(error => console.log('error', error));
         // setShow(true);
     }
