@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import logo from '../asset/logo.png'; // with import
 import home_banner from '../asset/Home_banner.jpg'; // with import
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,6 +17,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
+import NavBar from './NavBar';
+
 
 
 
@@ -82,8 +82,6 @@ export default function Album() {
 
     useEffect(() => {
 
-        console.log(name);
-        // Update the document title using the browser API
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
@@ -101,32 +99,8 @@ export default function Album() {
 
     return (
         <div style={{ background: "white" }}>
-            <Navbar >
-                <Navbar.Brand href="#home">
-                    <img
-                        src={logo}
-                        width="80"
-                        height="80"
-                        className="d-inline-block align-top"
-                        alt="React Bootstrap logo"
-                    />
-                </Navbar.Brand>
-                <Navbar.Brand href="#home">EsteConference</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="/home">Home</Nav.Link>
-                    <Nav.Link href="#features">Contact</Nav.Link>
-                    <Nav.Link href="#pricing">About us</Nav.Link>
-                </Nav>
-                <Nav className="justify-content-end" activeKey="/home">
-                    <Nav.Item>
-                        <Nav.Link href="/home">LogIn</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">SingUp</Nav.Link>
-                    </Nav.Item>
-                </Nav>
+            <NavBar />
 
-            </Navbar>
             <main>
                 {/* Hero unit */}
                 <div style={{
@@ -141,10 +115,9 @@ export default function Album() {
                             </Toolbar>
                         </AppBar>
                         <div style={{ textAlign: "right", padding: "10px" }}>
-                            <Button variant="success"> Submit Your Paper</Button>{' '}
+                            <Button variant="success">Submit Your Paper</Button>{' '}
                             <Button variant="danger">Author Registration</Button>{' '}
                             <Button variant="warning">Listener Registration</Button>{' '}
-
                         </div>
                         <div className={classes.contentWrapper}>
                             <Tabs
@@ -174,7 +147,7 @@ export default function Album() {
                                         </Typography>
                                     </Container>
                                 </Tab>
-                                <Tab eventKey="Planning" style={{ textAlign: "left", padding: "40px" }} title="Planning" >
+                                <Tab eventKey="Planning" style={{ padding: "40px" }} title="Planning" >
                                     <FullCalendar
                                         defaultView="dayGridMonth"
                                         header={{
@@ -184,16 +157,19 @@ export default function Album() {
                                         }}
                                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
 
-                                        weekends={false}
-                                        events={[
-                                            { title: 'event 1', date: '2020-06-01', idConference: 'x' },
-                                            { title: 'event 1', date: '2020-06-02' },
-                                            { title: 'event 2', date: '2020-06-01' }
-                                        ]}
+                                        weekends={true}
+                                        events={conference.plannings}
                                     />
                                 </Tab>
-                                <Tab eventKey="Chairs" title="Chairs">
-                                    test
+                                <Tab style={{ textAlign: "left", padding: "40px" }} eventKey="Chairs" title="Chairs">
+                                    <Container component="main" className={classes.main} >
+                                        <h4 style={{ color: "blue", textDecoration: "underline" }}>{"Conference creator chair"}</h4>
+                                        <h5>{conference.creator?.firstName}{" "}{conference.creator?.lastName}</h5>
+                                        <h4 style={{ color: "blue", textDecoration: "underline" }}>{"Conference planning chairs"}</h4>
+
+                                        <h4 style={{ color: "blue", textDecoration: "underline" }}>{"Conference scientist chairs"}</h4>
+
+                                    </Container>
                                 </Tab>
                             </Tabs>
                         </div>
