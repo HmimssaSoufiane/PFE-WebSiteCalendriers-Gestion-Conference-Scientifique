@@ -18,6 +18,11 @@ import ContentPlanning from './ContentPlanning';
 import ContentMyConferences from './ContectMyConferences';
 import Header from './Header';
 //import { Redirect } from 'react-router-dom';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ConferenceArticles from './ConferenceArticles';
+
+
+
 
 
 function Copyright() {
@@ -198,6 +203,7 @@ function Paperbase(props) {
         else if (e.target.name === "link2") { setWhichContent("link2"); }
         else if (e.target.name === "link3") { setWhichContent("link3"); }
         else if (e.target.name === "link4") { setWhichContent("link4"); }
+        else if (e.target.name === "link5") { setWhichContent("link5"); }
     }
 
 
@@ -229,6 +235,9 @@ function Paperbase(props) {
                             <CalendarTodayIcon /> Planning
                         </ListGroup.Item>
                         <ListGroup.Item action name="link4" onClick={handleChangeContent} >
+                            <DescriptionIcon /> ConferenceArticles
+                        </ListGroup.Item>
+                        <ListGroup.Item action name="link5" onClick={handleChangeContent} >
                             <PieChartIcon /> Analytics
                         </ListGroup.Item>
                     </ListGroup>
@@ -239,7 +248,8 @@ function Paperbase(props) {
                         {
                             (whichContent === "link1") ? <ContentMyConferences /> :
                                 (whichContent === "link2") ? <ContentCreateConference /> :
-                                    (whichContent === "link3") ? <ContentPlanning /> : <ContentAnalytics />}
+                                    (whichContent === "link3") ? <ContentPlanning /> :
+                                        (whichContent === "link4") ? <ConferenceArticles /> : <ContentAnalytics />}
                     </main>
                     <footer className={classes.footer}>
                         <Copyright />

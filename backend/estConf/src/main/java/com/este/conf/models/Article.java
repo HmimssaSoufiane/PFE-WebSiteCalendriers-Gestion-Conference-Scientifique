@@ -1,12 +1,11 @@
 package com.este.conf.models;
 
-
-
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  
  
 
@@ -29,6 +30,9 @@ public class Article implements Comparable<Article>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idArticle;
+	private String title ;
+	@Lob
+	@Column(length = 100000)
 	private String abstract_ ;
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
@@ -40,11 +44,13 @@ public class Article implements Comparable<Article>{
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
 	@JoinColumn(name="idAuthor")
+	@JsonIgnoreProperties("acticles")
 	private Author author;
  	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
 	@JoinColumn(name="idConference")
+	@JsonIgnoreProperties("articles")
 	private Conference conference;
 
 	@OneToMany(mappedBy = "article")
@@ -57,10 +63,14 @@ public class Article implements Comparable<Article>{
 	public Article () {}
 	
 
-	public Article(int idArticle, String abstract_, Byte[] file, float noteAverage, String status, String[] keyword,
-			Author author, Conference conference) {
+
+	
+
+	public Article(int idArticle, String title, String abstract_, Byte[] file, float noteAverage, String status,
+			String[] keyword, Author author, Conference conference, SortedSet<Note> notesByScientist) {
 		super();
 		this.idArticle = idArticle;
+		this.title = title;
 		this.abstract_ = abstract_;
 		this.file = file;
 		this.noteAverage = noteAverage;
@@ -68,7 +78,27 @@ public class Article implements Comparable<Article>{
 		this.keyword = keyword;
 		this.author = author;
 		this.conference = conference;
+		this.notesByScientist = notesByScientist;
 	}
+
+
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
 
 
 	public int getIdArticle() {

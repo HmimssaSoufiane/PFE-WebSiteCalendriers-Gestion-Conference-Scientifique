@@ -10,6 +10,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Author extends Person implements Comparable<Author>{
 
@@ -18,6 +20,7 @@ public class Author extends Person implements Comparable<Author>{
 	@OneToMany(mappedBy = "author")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
+	@JsonIgnoreProperties("author")
 	private Set<Article> articles = new TreeSet<>();
 	
 

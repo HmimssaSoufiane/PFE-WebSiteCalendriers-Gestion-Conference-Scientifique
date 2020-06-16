@@ -42,6 +42,7 @@ public class Conference implements Comparable<Conference> {
 	@OneToMany(mappedBy = "conference")
 	@Cascade(value = { CascadeType.ALL })
 	@SortNatural
+	@JsonIgnoreProperties("conference")
 	private Set<Article> articles = new TreeSet<Article>();
 
 	@OneToMany(mappedBy = "conference")
