@@ -15,6 +15,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Button from '@material-ui/core/Button';
 
 
 const styles = (theme) => ({
@@ -45,7 +47,7 @@ function Content(props) {
     const [conferences, setConferences] = useState([]);
     const [conference, setConference] = useState([]);
     const { name } = useParams();
-    const conferenceSelected = useRef(0);
+    const conferenceSelected = useRef(2);
 
     const handleChange = (event) => {
         conferenceSelected.current = parseInt(event.target.value);
@@ -104,6 +106,7 @@ function Content(props) {
                                     <TableCell >Note</TableCell>
                                     <TableCell >Status </TableCell>
                                     <TableCell >Author </TableCell>
+                                    <TableCell >View Article </TableCell>
                                     <TableCell >Send to Scientist </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -114,6 +117,16 @@ function Content(props) {
                                         <TableCell >{row.noteAverage}</TableCell>
                                         <TableCell >{row.status}</TableCell>
                                         <TableCell >{row.author.firstName}</TableCell>
+                                        <TableCell >
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                className={classes.button}
+                                                startIcon={<VisibilityIcon />}
+                                            >
+                                                View submitted article
+                                        </Button>
+                                        </TableCell>
                                         <TableCell >
                                             <InputGroup className="mb-2">
                                                 <InputGroup.Prepend>
