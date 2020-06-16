@@ -44,7 +44,15 @@ const styles = (theme) => ({
 function Content(props) {
     const { classes } = props;
     const [conferences, setConferences] = useState([]);
+    const [conference, setConference] = useState([]);
     const { name } = useParams();
+    const [conferenceSelected, setConferenceSelected] = useState(1);
+
+    const handleChange = (event) => {
+        setConferenceSelected(parseInt(event.target.value));
+
+        setConference(conferences.filter(x => x.idConference === conferenceSelected));
+    };
 
 
     useEffect(() => {
@@ -74,8 +82,8 @@ function Content(props) {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridState" >
                             <Form.Label >Select Conference </Form.Label>
-                            <Form.Control as="select" value="Choose...">
-                                {conferences.map(row => (<option value={row.name}>{row.name}</option>))}
+                            <Form.Control as="select" value={conferenceSelected} onChange={handleChange} >
+                                {conferences.map(row => (<option value={row.idConference}>{row.name}</option>))}
                             </Form.Control>
                         </Form.Group>
                     </Form.Row >
@@ -118,11 +126,7 @@ function Content(props) {
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
 
                         weekends={true}
-                        events={[
-                            { title: 'event 1', date: '2020-06-01' },
-                            { title: 'event 1', date: '2020-06-02' },
-                            { title: 'event 2', date: '2020-06-01' }
-                        ]}
+                        events={conference[0]?.plannings}
                     />
                 </div>
             </Paper>
