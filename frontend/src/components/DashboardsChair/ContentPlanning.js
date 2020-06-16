@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -46,13 +46,41 @@ function Content(props) {
     const [conferences, setConferences] = useState([]);
     const [conference, setConference] = useState([]);
     const { name } = useParams();
-    const [conferenceSelected, setConferenceSelected] = useState(1);
+    const conferenceSelected = useRef(0);
+    const [date, setDate] = useState("");
+    const [title, setTitle] = useState("");
+
 
     const handleChange = (event) => {
-        setConferenceSelected(parseInt(event.target.value));
-
-        setConference(conferences.filter(x => x.idConference === conferenceSelected));
+        conferenceSelected.current = parseInt(event.target.value);
+        setConference(conferences.filter(x => x.idConference === conferenceSelected.current));
+        console.log(conferenceSelected.current);
+        console.log(conference);
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "title": title,
+            "date": date,
+        });
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/api/conference/conferences/" + conferenceSelected.current + "/planning", requestOptions)
+            .then(response => response.text())
+            .then(result => setConference([result]))
+            .catch(error => console.log('error', error));
+        // setShow(true);
+    }
 
 
     useEffect(() => {
@@ -77,12 +105,12 @@ function Content(props) {
                         <h2 style={{ padding: "10px 0  5px 0", color: "white" }}>Conference</h2>
                     </Toolbar>
                 </AppBar>
-                <Form style={{ textAlign: "left", padding: "20px" }}>
+                <Form onSubmit={handleSubmit} style={{ textAlign: "left", padding: "20px" }}>
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridState" >
                             <Form.Label >Select Conference </Form.Label>
-                            <Form.Control as="select" value={conferenceSelected} onChange={handleChange} >
+                            <Form.Control as="select" value={conferenceSelected.current} onChange={handleChange} >
                                 {conferences.map(row => (<option value={row.idConference}>{row.name}</option>))}
                             </Form.Control>
                         </Form.Group>
@@ -91,7 +119,9 @@ function Content(props) {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridAddress1">
                             <Form.Label>Event Name</Form.Label>
-                            <Form.Control placeholder="Event name" />
+                            <Form.Control type="text" placeholder="Event name" onChange={e => {
+                                setTitle(e.target.value);
+                            }} />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
@@ -100,6 +130,9 @@ function Content(props) {
                             <Form.Control
                                 type="date"
                                 style={{ width: '100%' }}
+                                onChange={e => {
+                                    setDate(e.target.value);
+                                }}
                             />
                         </Form.Group>
                     </Form.Row>
