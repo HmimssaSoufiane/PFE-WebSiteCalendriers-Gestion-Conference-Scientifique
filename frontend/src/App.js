@@ -23,7 +23,7 @@ function App() {
         <Route path="/DashboardsChair" component={DashboardsChair} />
         <Route path="/DashboardsAuthor" component={MainDashboadAuthor} />
         <Route path="/DashboardsScientist" component={DashboardsScientist} />
-        <Route path="/ConferanceDetails/:nom" component={ConferanceDetails} />
+        <Route path="/ConferanceDetails/:name" component={ConferanceDetails} />
         <Route path="/SubmitAnArticle" component={SubmitAnArticle} />
 
       </Router>

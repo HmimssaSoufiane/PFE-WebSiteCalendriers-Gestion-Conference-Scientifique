@@ -20,10 +20,9 @@ public class Planning  implements Comparable<Planning>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPlanning;
-	private String event ;
-	private Date eventDay;
-	private Date timeStart;
-	private Date timeEnd;
+	private String title ;
+	private Date date;
+
 	
 	@ManyToOne
 	@Cascade(value = { CascadeType.SAVE_UPDATE })
@@ -35,14 +34,19 @@ public class Planning  implements Comparable<Planning>{
 	public Planning() {}
 
 
-	public Planning(int idPlanning, String event, Date eventDay, Date timeStart, Date timeEnd) {
+
+
+
+	public Planning(int idPlanning, String title, Date date, Conference conference) {
 		super();
 		this.idPlanning = idPlanning;
-		this.event = event;
-		this.eventDay = eventDay;
-		this.timeStart = timeStart;
-		this.timeEnd = timeEnd;
+		this.title = title;
+		this.date = date;
+		this.conference = conference;
 	}
+
+
+
 
 
 	public int getIdPlanning() {
@@ -50,49 +54,47 @@ public class Planning  implements Comparable<Planning>{
 	}
 
 
+
+
+
 	public void setIdPlanning(int idPlanning) {
 		this.idPlanning = idPlanning;
 	}
 
 
-	public String getEvent() {
-		return event;
+
+
+
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setEvent(String event) {
-		this.event = event;
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 
-	public Date getEventDay() {
-		return eventDay;
+
+
+
+	public Date getDate() {
+		return date;
 	}
 
 
-	public void setEventDay(Date eventDay) {
-		this.eventDay = eventDay;
+
+
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 
-	public Date getTimeStart() {
-		return timeStart;
-	}
 
-
-	public void setTimeStart(Date timeStart) {
-		this.timeStart = timeStart;
-	}
-
-
-	public Date getTimeEnd() {
-		return timeEnd;
-	}
-
-
-	public void setTimeEnd(Date timeEnd) {
-		this.timeEnd = timeEnd;
-	}
 
 
 	public Conference getConference() {
@@ -100,9 +102,15 @@ public class Planning  implements Comparable<Planning>{
 	}
 
 
+
+
+
 	public void setConference(Conference conference) {
 		this.conference = conference;
 	}
+
+
+
 
 
 	@Override

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -13,6 +14,12 @@ import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Moment from 'react-moment';
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
+
 
 
 
@@ -65,12 +72,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const conferences =
-    { name: "Computers and Computation Conference", about: "The International Research Conference is a federated organization dedicated to bringing together a significant number of diverse scholarly events for presentation within the conference program. Events will run over a span of time during the conference depending on the number and length of the presentations. With its high quality, it provides an exceptional value for students, academics and industry researchers.", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" };
 
 export default function Album() {
     const classes = useStyles();
     const [key, setKey] = useState('home');
+    const [conference, setConference] = useState({});
+    const { name } = useParams();
+
+
+    useEffect(() => {
+
+        console.log(name);
+        // Update the document title using the browser API
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch('http://localhost:8080/api/conference/conferences/' + name, requestOptions)
+            .then(response => response.text())
+            .then(result => setConference(JSON.parse(result)))
+            .catch(error => console.log('error', error));
+
+
+    }, [name]);
+
 
 
     return (
@@ -127,24 +153,44 @@ export default function Album() {
                                 activeKey={key}
                                 onSelect={(k) => setKey(k)}
                             >
-                                <Tab eventKey="home" title="About">
+                                <Tab eventKey="home" style={{ textAlign: "left", padding: "40px" }} title="About">
                                     <CssBaseline />
-                                    <Container style={{ textAlign: "left", padding: "40px" }} component="main" className={classes.main} >
+                                    <Container component="main" className={classes.main} >
                                         <Typography variant="h2" component="h1" gutterBottom>
-                                            {conferences.name}
+                                            {conference.name}
                                         </Typography>
                                         <h4 style={{ color: "blue" }}>{"Dates"}</h4>
                                         <Typography variant="h6" component="h2" gutterBottom>
-                                            {conferences.dateStar} {" to "} {conferences.dateEnd}
+                                            <Moment format="YYYY/MM/DD">
+                                                {conference.dateStar}
+                                            </Moment> {" to "}
+                                            <Moment format="YYYY/MM/DD">
+                                                {conference.dateEnd}
+                                            </Moment>
                                         </Typography>
                                         <h4 style={{ color: "blue" }}>{"About the conference"}</h4>
                                         <Typography variant="h6" component="h2" gutterBottom>
-                                            {conferences.about}
+                                            {conference.about}
                                         </Typography>
                                     </Container>
                                 </Tab>
-                                <Tab eventKey="Planning" title="Planning">
-                                    test2
+                                <Tab eventKey="Planning" style={{ textAlign: "left", padding: "40px" }} title="Planning" >
+                                    <FullCalendar
+                                        defaultView="dayGridMonth"
+                                        header={{
+                                            left: 'prev,next today',
+                                            center: 'title',
+                                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                                        }}
+                                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+
+                                        weekends={false}
+                                        events={[
+                                            { title: 'event 1', date: '2020-06-01', idConference: 'x' },
+                                            { title: 'event 1', date: '2020-06-02' },
+                                            { title: 'event 2', date: '2020-06-01' }
+                                        ]}
+                                    />
                                 </Tab>
                                 <Tab eventKey="Chairs" title="Chairs">
                                     test
