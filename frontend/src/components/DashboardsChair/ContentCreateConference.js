@@ -7,8 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button'
 import Toolbar from '@material-ui/core/Toolbar';
-import Alert from 'react-bootstrap/Alert'
-
+import Alert from 'react-bootstrap/Alert';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -38,7 +38,7 @@ const styles = (theme) => ({
 
 function Content(props) {
     const { classes } = props;
-    const [name, setName] = useState("");
+    const [nameConference, setNameConference] = useState("");
     const [shortName, setShortName] = useState("");
     const [contry, setContry] = useState("");
     const [city, setCity] = useState('');
@@ -47,8 +47,8 @@ function Content(props) {
     const [discipline, setDiscipline] = useState("");
     const [dateStart, setDateStar] = useState("");
     const [dateEnd, setDateEnd] = useState("");
-
     const [show, setShow] = useState(false);
+    const { name } = useParams();
 
 
     const handleSubmit = (evt) => {
@@ -57,7 +57,7 @@ function Content(props) {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "name": name,
+            "name": nameConference,
             "shortName": shortName,
             "contry": contry,
             "city": city,
@@ -79,7 +79,7 @@ function Content(props) {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/chair/chairs/1/conference", requestOptions)
+        fetch("http://localhost:8080/api/chair/chairs/" + name + "/conference", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -103,7 +103,7 @@ function Content(props) {
                         <Form.Group as={Col} >
                             <Form.Label>Coference name</Form.Label>
                             <Form.Control type="text" placeholder="Coference name" onChange={e => {
-                                setName(e.target.value);
+                                setNameConference(e.target.value);
                             }} />
                         </Form.Group>
 
@@ -192,7 +192,7 @@ function Content(props) {
                         <div className="d-flex justify-content-end">
                             <Button type="reset" onClick={() => setShow(false)} variant="outline-success">
                                 Close
-                                </Button>
+                            </Button>
                         </div>
                     </Alert>
                 </Form>

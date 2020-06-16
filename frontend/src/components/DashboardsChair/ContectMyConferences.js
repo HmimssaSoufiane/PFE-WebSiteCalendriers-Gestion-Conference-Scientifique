@@ -4,7 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import Button from 'react-bootstrap/Button'
+
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,7 +18,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import EditIcon from '@material-ui/icons/Edit';
 import { useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 
@@ -110,7 +110,7 @@ function Content(props) {
                                 <TableCell >Short Name</TableCell>
                                 <TableCell align="right">Date star</TableCell>
                                 <TableCell align="right">Date end </TableCell>
-                                <TableCell >Edit </TableCell>
+                                <TableCell >Action </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -129,14 +129,8 @@ function Content(props) {
                                         </Moment>
                                     </TableCell>
                                     <TableCell >
-                                        <Button
-                                            variant="contained"
-                                            color="secondary"
-                                            className={classes.button}
-                                            startIcon={<EditIcon />}
-                                        >
-                                            Edit
-                                        </Button>
+                                        <Button variant="outline-primary">Delete</Button>{' '}
+                                        <Button variant="outline-secondary">Edit</Button>{' '}
                                     </TableCell>
                                 </TableRow>
                             ))}

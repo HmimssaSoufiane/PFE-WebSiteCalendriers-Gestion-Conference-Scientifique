@@ -10,7 +10,9 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 import Form from 'react-bootstrap/Form'
 import { Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
+
 
 
 import '@fullcalendar/core/main.css';
@@ -42,6 +44,8 @@ const styles = (theme) => ({
 function Content(props) {
     const { classes } = props;
     const [conferences, setConferences] = useState([]);
+    const { name } = useParams();
+
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -50,16 +54,16 @@ function Content(props) {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/chair/chairs/1", requestOptions)
+        fetch("http://localhost:8080/api/chair/chairs/" + name, requestOptions)
             .then(response => response.text())
             .then(result => setConferences((JSON.parse(result)).createdConferences))
             .catch(error => console.log('error', error))
 
-    }, []);
+    }, [name]);
 
     return (
         <div >
-            <Paper style={{ marginBottom: "10px" }} className={classes.paper}>
+            <Paper style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", minWidth: "20%" }} className={classes.paper}>
                 <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
                     <Toolbar>
                         <h2 style={{ padding: "10px 0  5px 0", color: "white" }}>Conference</h2>
@@ -97,7 +101,7 @@ function Content(props) {
                     </Button>
                 </Form>
             </Paper>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} style={{ marginBottom: "10px", display: "inline-block", verticalAlign: "top", maxHeight: "50%", minWidth: "60%" }}>
                 <AppBar style={{ background: "#009be5" }} className={classes.searchBar} position="static" color="default" elevation={0}>
                     <Toolbar>
                         <h2 style={{ padding: "10px 0  5px 0", color: "white" }}> Conference its events </h2>
@@ -113,7 +117,7 @@ function Content(props) {
                         }}
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
 
-                        weekends={false}
+                        weekends={true}
                         events={[
                             { title: 'event 1', date: '2020-06-01' },
                             { title: 'event 1', date: '2020-06-02' },
