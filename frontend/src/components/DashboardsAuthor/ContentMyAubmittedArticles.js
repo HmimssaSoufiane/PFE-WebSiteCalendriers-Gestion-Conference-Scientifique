@@ -53,10 +53,7 @@ function Content(props) {
             .then(response => response.text())
             .then(result => setArticles((JSON.parse(result)).articles))
             .catch(error => console.log('error', error));
-        console.log(articles);
-
-
-    }, [name, articles]);
+    }, [name]);
 
     return (
         <Paper className={classes.paper}>

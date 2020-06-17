@@ -188,9 +188,8 @@ function Paperbase(props) {
     const handleChangeContent = (e) => {
 
         if (e.target.name === "link1") { setWhichContent("link1"); }
-        else if (e.target.name === "link2") { setWhichContent("link2"); }
-        else if (e.target.name === "link3") { setWhichContent("link3"); }
-        else if (e.target.name === "link4") { setWhichContent("link4"); }
+        else { setWhichContent("link2"); }
+
     }
 
 
