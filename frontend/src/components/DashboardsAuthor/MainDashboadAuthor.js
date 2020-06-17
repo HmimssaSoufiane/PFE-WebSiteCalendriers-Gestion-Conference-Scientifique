@@ -5,12 +5,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import ListGroup from 'react-bootstrap/ListGroup';
-import PeopleIcon from '@material-ui/icons/People';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import clsx from 'clsx';
-import ContentMyConferences from './ContectMyConferences';
-import ContectMyArticles from './ContectMyArticles';
+import ContentMyAubmittedArticles from './ContentMyAubmittedArticles';
+import ContentSubmitAnArticle from './ContentSubmitAnArticle';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import PublishIcon from '@material-ui/icons/Publish';
 import Header from './Header';
@@ -208,15 +207,12 @@ function Paperbase(props) {
                             Author Dashboards
                         </ListItemText>
                     </ListItem>
-                    <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
-                        <ListGroup.Item action href="#link1" name="link1" onClick={handleChangeContent} >
-                            <PeopleIcon /> My Conferences
+                    <ListGroup style={{ marginTop: "30px" }}  >
+                        <ListGroup.Item action name="link1" onClick={handleChangeContent} >
+                            <PictureAsPdfIcon /> My submitted articles
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" name="link2" onClick={handleChangeContent}  >
-                            <PublishIcon /> Submit new articles
-                        </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" name="link3" onClick={handleChangeContent}  >
-                            <PictureAsPdfIcon /> My Articles
+                        <ListGroup.Item action name="link2" onClick={handleChangeContent}  >
+                            <PublishIcon /> Submit new article
                         </ListGroup.Item>
                     </ListGroup>
                 </nav>
@@ -224,7 +220,7 @@ function Paperbase(props) {
                     <Header />
                     <main className={classes.main}>
                         {
-                            (whichContent === "link1") ? <ContentMyConferences /> : <ContectMyArticles />}
+                            (whichContent === "link1") ? <ContentMyAubmittedArticles /> : <ContentSubmitAnArticle />}
                     </main>
                     <footer className={classes.footer}>
                         <Copyright />

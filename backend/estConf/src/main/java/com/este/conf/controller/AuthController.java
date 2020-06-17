@@ -35,10 +35,10 @@ public class AuthController {
 	}
 
 	@PostMapping("/authorsLogin")
-	public Chair findClientByEmail(@NotNull @RequestBody Author client) {
+	public Author findClientByEmail(@NotNull @RequestBody Author client) {
 
 		if (client.getPassword() != null && client.getEmail() != null) {
-			Chair _client = authorRepository.findByEmail(client.getEmail());
+			Author _client = authorRepository.findByEmail(client.getEmail());
 			if (_client != null)
 				if (_client.getPassword().equals(client.getPassword()))
 					return _client;

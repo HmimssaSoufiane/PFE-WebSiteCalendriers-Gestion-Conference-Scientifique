@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,6 +13,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Redirect } from 'react-router-dom';
+
 
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
@@ -41,9 +43,23 @@ const styles = (theme) => ({
 
 function Header(props) {
     const { classes, onDrawerToggle } = props;
+    const [client, setClient] = useState({});
+    const [logout, setLogout] = useState(false);
+    const handleOut = () => {
+        localStorage.removeItem('client');
+        setLogout(true);
+        setClient({});
+    };
+    useEffect(() => {
+        setClient(JSON.parse(localStorage.getItem('client')));
+    }, []);
+
 
     return (
+
         <React.Fragment>
+            {(logout === true) ? <Redirect to="/SignIn" /> : null}
+
             <AppBar color="primary" position="sticky" elevation={0}>
                 <Toolbar>
                     <Grid container spacing={1} alignItems="center">
@@ -90,7 +106,7 @@ function Header(props) {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Button className={classes.button} variant="outlined" color="inherit" size="small">
+                            <Button className={classes.button} variant="outlined" onClick={handleOut} color="inherit" size="small">
                                 Logout
                             </Button>
                         </Grid>

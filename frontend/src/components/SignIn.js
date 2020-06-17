@@ -97,12 +97,11 @@ export default function SignIn() {
             .then(response => response.text())
             .then(result => {
                 if (result !== "") {
-                    //console.log(JSON.parse(result));
+                    console.log(JSON.parse(result));
                     localStorage.setItem('client', result);
                     setClient(JSON.parse(localStorage.getItem('client')));
                     //console.log('cliant', JSON.parse(localStorage.getItem('client')));
-                    //console.log('cliant state', client);
-
+                    console.log('cliant state', client);
                 }
                 else setShow(true);
             })
@@ -114,7 +113,8 @@ export default function SignIn() {
             <NavBar />
             <Container component="main" maxWidth="xs">
 
-                {(Object.keys(client).length !== 0) ? (compteType === 10) ? <Redirect to={`/DashboardsChair/${client.idPerson}`} /> : (compteType === 30) ? <Redirect to="/DashboardsAuthor" /> : null : null}
+                {(Object.keys(client).length !== 0) ? (compteType === 10) ? <Redirect to={`/DashboardsChair/${client.idPerson}`} /> : (compteType === 30) ? <Redirect to={`/DashboardsAuthor/${client.idPerson}`} /> : null : null
+                }
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

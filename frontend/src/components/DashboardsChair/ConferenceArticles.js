@@ -69,9 +69,6 @@ function Content(props) {
             .then(response => response.text())
             .then(result => setConferences((JSON.parse(result)).createdConferences))
             .catch(error => console.log('error', error))
-
-
-
     }, [name]);
 
 

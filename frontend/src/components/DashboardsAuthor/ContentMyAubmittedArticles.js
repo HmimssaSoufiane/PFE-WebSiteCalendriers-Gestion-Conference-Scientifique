@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +12,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Button from '@material-ui/core/Button';
+
 const styles = (theme) => ({
     paper: {
         maxWidth: 936,
@@ -37,17 +39,24 @@ const styles = (theme) => ({
 
 function Content(props) {
     const { classes } = props;
-    const [conferences, setConferences] = useState([
-        { name: "Computers and Computation Conference", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Advances in Animal Anatomy and Wild Animals Conference", shortName: "ICAAAWA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Advances in Aquafarming Conference", shortName: "ICAA", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: "Autograft, Allograft, Isograft and Xenograft in Surgery Conference", shortName: "ICAAIXS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" },
-        { name: " Autonomous Agents and Multi-Agent Systems Conference", shortName: "ICAAMAS", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" }]);
+    const { name } = useParams();
+    const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        // Update the document title using the browser API
 
-    });
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch('http://localhost:8080/api/author/authors/' + name, requestOptions)
+            .then(response => response.text())
+            .then(result => setArticles((JSON.parse(result)).articles))
+            .catch(error => console.log('error', error));
+        console.log(articles);
+
+
+    }, [name, articles]);
 
     return (
         <Paper className={classes.paper}>
@@ -61,22 +70,18 @@ function Content(props) {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                             <TableRow style={{ textAlign: "left", background: "#f5f5dc", paddingBottom: "10px" }}>
-                                <TableCell style={{ fontWeight: "bold" }}>Name</TableCell>
-                                <TableCell style={{ fontWeight: "bold" }} >Short Name</TableCell>
-                                <TableCell style={{ fontWeight: "bold" }}>Location</TableCell>
-                                <TableCell style={{ fontWeight: "bold" }} align="right">Date star</TableCell>
-                                <TableCell style={{ fontWeight: "bold" }} align="right">Date end </TableCell>
-                                <TableCell style={{ fontWeight: "bold" }}>Edit </TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Article title</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }} >Conference Name</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Articile status</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Action </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {conferences.map(row => (
-                                <TableRow style={{ textAlign: "left", background: " #f5f5dc" }} key={row.idConference}>
-                                    <TableCell>{row.name}</TableCell>
-                                    <TableCell >{row.shortName}</TableCell>
-                                    <TableCell >{row.location}</TableCell>
-                                    <TableCell align="right">{row.dateStar}</TableCell>
-                                    <TableCell align="right">{row.dateEnd}</TableCell>
+                            {articles?.map(row => (
+                                <TableRow style={{ textAlign: "left", background: " #f5f5dc" }} key={row.idArticle}>
+                                    <TableCell>{row.title}</TableCell>
+                                    <TableCell >{row.conference.shortName}</TableCell>
+                                    <TableCell >{row.status}</TableCell>
                                     <TableCell >
                                         <Button
                                             variant="contained"

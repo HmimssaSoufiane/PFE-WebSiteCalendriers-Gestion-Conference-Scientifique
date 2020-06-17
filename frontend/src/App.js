@@ -21,7 +21,7 @@ function App() {
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
         <Route path="/DashboardsChair/:name" component={DashboardsChair} />
-        <Route path="/DashboardsAuthor" component={MainDashboadAuthor} />
+        <Route path="/DashboardsAuthor/:name" component={MainDashboadAuthor} />
         <Route path="/DashboardsScientist" component={DashboardsScientist} />
         <Route path="/ConferanceDetails/:name" component={ConferanceDetails} />
         <Route path="/SubmitAnArticle" component={SubmitAnArticle} />
