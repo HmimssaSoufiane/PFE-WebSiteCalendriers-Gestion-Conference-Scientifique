@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import logo from '../asset/logo.png'; // with import
 import home_banner from '../asset/Home_banner.jpg'; // with import
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Form from 'react-bootstrap/Form';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Tooltip from '@material-ui/core/Tooltip';
+import NavBar from './NavBar';
+
 
 
 
@@ -40,11 +33,6 @@ const styles = (theme) => ({
         borderColor: lightColor,
     },
 });
-
-
-
-
-
 
 function Copyright() {
 
@@ -92,65 +80,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const conferences =
-    { name: "Computers and Computation Conference", about: "The International Research Conference is a federated organization dedicated to bringing together a significant number of diverse scholarly events for presentation within the conference program. Events will run over a span of time during the conference depending on the number and length of the presentations. With its high quality, it provides an exceptional value for students, academics and industry researchers.", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" };
 
 function Album(props) {
     const classes = useStyles();
-    const { classes2, onDrawerToggle } = props;
-
-    const [key, setKey] = useState('home');
+    const conferences =
+        { name: "Computers and Computation Conference", about: "The International Research Conference is a federated organization dedicated to bringing together a significant number of diverse scholarly events for presentation within the conference program. Events will run over a span of time during the conference depending on the number and length of the presentations. With its high quality, it provides an exceptional value for students, academics and industry researchers.", shortName: "COMPUTE", location: "Barcelona", dateStar: "2020-06-10", dateEnd: "2020-06-14" };
 
 
     return (
         <div style={{ background: "white" }}>
-            <Navbar >
-                <Navbar.Brand href="#home">
-                    <img
-                        src={logo}
-                        width="80"
-                        height="80"
-                        className="d-inline-block align-top"
-                        alt="React Bootstrap logo"
-                    />
-                </Navbar.Brand>
-                <Navbar.Brand href="#home">EsteConference</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="/home">Home</Nav.Link>
-                    <Nav.Link href="#features">Contact</Nav.Link>
-                    <Nav.Link href="#pricing">About us</Nav.Link>
-                </Nav>
-                <Nav className="justify-content-end" activeKey="/home">
-                    <Grid container spacing={1} alignItems="center">
-                        <Hidden smUp>
-                            <Grid item>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    onClick={onDrawerToggle}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                            </Grid>
-                        </Hidden>
-                        <Grid item xs />
-                        <Grid item>
-                            <Tooltip title="Alerts • No alerts">
-                                <IconButton color="inherit">
-                                    <NotificationsIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </Grid>
-                        <Grid item>
-                            <IconButton color="inherit">
-                                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-                            </IconButton>
-                        </Grid>
-                    </Grid>
+            <NavBar />
 
-                </Nav>
-
-            </Navbar>
             <main>
                 {/* Hero unit */}
                 <div style={{
@@ -183,10 +123,6 @@ function Album(props) {
                         </div>
                     </Paper>
                 </div>
-                <Container className={classes.cardGrid}>
-                    {/* End hero unit */}
-
-                </Container>
             </main>
             {/* Footer */}
             <footer className={classes.footer}>
