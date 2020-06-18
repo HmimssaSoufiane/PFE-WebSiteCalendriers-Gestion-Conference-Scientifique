@@ -8,7 +8,8 @@ import DashboardsChair from './components/DashboardsChair/MainDashboadChair';
 import MainDashboadAuthor from './components/DashboardsAuthor/MainDashboadAuthor';
 import DashboardsScientist from './components/DashboardsScientist/MainDashboadScientist';
 import ConferanceDetails from './components/ConferanceDetails'
-import SubmitAnArticle from './components/SubmitAnArticle';;
+import SubmitAnArticle from './components/SubmitAnArticle';
+
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/DashboardsScientist" component={DashboardsScientist} />
         <Route path="/ConferanceDetails/:name" component={ConferanceDetails} />
         <Route path="/SubmitAnArticle" component={SubmitAnArticle} />
+
 
       </Router>
     </div>

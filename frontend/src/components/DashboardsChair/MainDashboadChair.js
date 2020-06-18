@@ -226,16 +226,16 @@ function Paperbase(props) {
                     </ListItem>
                     <ListGroup defaultActiveKey="#link1" style={{ marginTop: "30px" }}  >
                         <ListGroup.Item action name="link1" onClick={handleChangeContent} >
-                            <PeopleIcon /> My Conferences
+                            <PeopleIcon /> My conferences
                         </ListGroup.Item>
                         <ListGroup.Item action name="link2" onClick={handleChangeContent}  >
-                            <AddCircleOutlineIcon /> Create Conference
+                            <AddCircleOutlineIcon /> Create conference
                         </ListGroup.Item>
                         <ListGroup.Item action name="link3" onClick={handleChangeContent} >
                             <CalendarTodayIcon /> Planning
                         </ListGroup.Item>
                         <ListGroup.Item action name="link4" onClick={handleChangeContent} >
-                            <DescriptionIcon /> ConferenceArticles
+                            <DescriptionIcon /> Conference articles
                         </ListGroup.Item>
                         <ListGroup.Item action name="link5" onClick={handleChangeContent} >
                             <PieChartIcon /> Analytics

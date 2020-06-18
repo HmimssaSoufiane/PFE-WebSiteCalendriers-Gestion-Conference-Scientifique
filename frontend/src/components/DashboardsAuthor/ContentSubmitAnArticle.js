@@ -82,6 +82,8 @@ function Content(props) {
             .catch(error => console.log('error', error));
         setShow(true);
 
+
+
     }
 
     useEffect(() => {
